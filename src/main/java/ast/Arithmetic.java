@@ -1,5 +1,5 @@
 /*
- * This source file is part of the lab01 open source project.
+ * This source file is part of the p--compiler open source project.
  *
  * Copyright (c) 2018 willy and the lab01 project authors.
  * Licensed under GNU General Public License v3.0.
@@ -10,95 +10,100 @@
 package ast;
 
 /**
- * Instance of Arithmetic.java
+ * Instance of Arithmetic expression, defined by an expression, am arithmetic
+ * operator and another expression.
  * 
- * @author
- * @version
+ * @author Guillermo Facundo Colunga
+ * @version 201802112314
  */
 public class Arithmetic implements Expression {
 
 	private Expression left, right;
-	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 	private String arithmeticOperator = "";
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
+	 * Allocates an arithmetic object and initializes it so that it represents
+	 * and arithmetic expression composed by Arithmetic operator Arithmetic.
 	 * 
-	 * @param i
-	 * @param j
-	 * @param arithmetic
-	 * @param string
-	 * @param arithmetic2
+	 * @param line is the line of the expression.
+	 * @param column is the column of the expression.
+	 * @param left is the left side of the operation.
+	 * @param arithmeticOperator string representing the arithmetic operator for the expression.
+	 * @param right
 	 */
-	public Arithmetic( int i, int j, Arithmetic arithmetic, String string,
-			Arithmetic arithmetic2 ) {
-		this.row = i;
-		this.column = j;
-		this.left = arithmetic;
-		this.arithmeticOperator = string;
-		this.right = arithmetic2;
+	public Arithmetic( int line, int column, Arithmetic left, String arithmeticOperator,
+			Arithmetic right ) {
+		this.line = line;
+		this.column = column;
+		this.left = left;
+		this.arithmeticOperator = arithmeticOperator;
+		this.right = right;
 	}
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
+	 * Allocates an arithmetic object and initializes it so that it represents
+	 * and arithmetic expression composed by Arithmetic operator Variable.
 	 * 
-	 * @param i
-	 * @param j
-	 * @param arithmetic
-	 * @param string
-	 * @param variable
+	 * @param line of the expression.
+	 * @param column of the expression.
+	 * @param left side of the expression.
+	 * @param arithmeticOperator string representing the arithmetic operator for the expression.
+	 * @param right side of the expression.
 	 */
-	public Arithmetic( int i, int j, Arithmetic arithmetic, String string, Variable variable ) {
-		this.row = i;
-		this.column = j;
-		this.left = arithmetic;
-		this.arithmeticOperator = string;
-		this.right = variable;
+	public Arithmetic( int line, int column, Arithmetic left, String arithmeticOperator, Variable right ) {
+		this.line = line;
+		this.column = column;
+		this.left = left;
+		this.arithmeticOperator = arithmeticOperator;
+		this.right = right;
 	}
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
+	 * Allocates an arithmetic object and initializes it so that it represents
+	 * and arithmetic expression composed by UnaryMinus operator IntLiteral.
 	 * 
-	 * @param i
-	 * @param j
-	 * @param unaryMinus
-	 * @param string
-	 * @param intLiteral
+	 * @param line of the expression.
+	 * @param column of the expression.
+	 * @param left side of the expression.
+	 * @param arithmeticOperator string representing the arithmetic operator for the expression.
+	 * @param right side of the expression.
 	 */
-	public Arithmetic( int i, int j, UnaryMinus unaryMinus, String string, IntLiteral intLiteral ) {
-		this.row = i;
-		this.column = j;
-		this.left = unaryMinus;
-		this.arithmeticOperator = string;
-		this.right = intLiteral;
+	public Arithmetic( int line, int column, UnaryMinus left, String arithmeticOperator, IntLiteral right ) {
+		this.line = line;
+		this.column = column;
+		this.left = left;
+		this.arithmeticOperator = arithmeticOperator;
+		this.right = right;
 	}
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
+	 * Allocates an arithmetic object and initializes it so that it represents
+	 * and arithmetic expression composed by IntLiteral operator Variable.
 	 * 
-	 * @param i
-	 * @param j
-	 * @param intLiteral
-	 * @param string
-	 * @param variable
+	 * @param line of the expression.
+	 * @param column of the expression.
+	 * @param left side of the expression.
+	 * @param arithmeticOperator string representing the arithmetic operator for the expression.
+	 * @param right side of the expression.
 	 */
-	public Arithmetic( int i, int j, IntLiteral intLiteral, String string, Variable variable ) {
-		this.row = i;
-		this.column = j;
-		this.left = intLiteral;
-		this.arithmeticOperator = string;
-		this.right = variable;
+	public Arithmetic( int line, int column, IntLiteral left, String arithmeticOperator, Variable right ) {
+		this.line = line;
+		this.column = column;
+		this.left = left;
+		this.arithmeticOperator = arithmeticOperator;
+		this.right = right;
 	}
 
 	@Override public int getLine() {
-		return this.row;
+		return this.line;
 	}
 
 	@Override public int getColumn() {
 		return this.column;
 	}
 
-	public String toString() {
+	@Override public String toString() {
 		return left.toString() + arithmeticOperator + right.toString();
 	}
 

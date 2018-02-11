@@ -1,5 +1,5 @@
 /*
- * This source file is part of the lab01 open source project.
+ * This source file is part of the p--compiler open source project.
  *
  * Copyright (c) 2018 willy and the lab01 project authors.
  * Licensed under GNU General Public License v3.0.
@@ -10,37 +10,37 @@
 package ast;
 
 /**
- * Instance of IntLiteral.java
+ * Represents an integer literal value in the AST tree.
  * 
- * @author
- * @version
+ * @author Guillermo Facundo Colunga
+ * @version 201802112344
  */
 public class IntLiteral implements Expression {
 
-	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN, value;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN, value;
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
+	 * Allocates an integer literal object and initializes it.
 	 * 
-	 * @param i
-	 * @param j
-	 * @param k
+	 * @param line where the int literal is.
+	 * @param column where the int literal is.
+	 * @param value of the int literal.
 	 */
-	public IntLiteral( int i, int j, int k ) {
-		this.row = i;
-		this.column = j;
-		this.value = k;
+	public IntLiteral( int line, int column, int value ) {
+		this.line = line;
+		this.column = column;
+		this.value = value;
 	}
 
 	@Override public int getLine() {
-		return this.row;
+		return this.line;
 	}
 
 	@Override public int getColumn() {
 		return this.column;
 	}
-	
-	public String toString() {
+
+	@Override public String toString() {
 		return Integer.toString( this.value );
 	}
 

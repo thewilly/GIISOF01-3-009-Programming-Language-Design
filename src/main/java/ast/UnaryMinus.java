@@ -1,5 +1,5 @@
 /*
- * This source file is part of the lab01 open source project.
+ * This source file is part of the p--compiler open source project.
  *
  * Copyright (c) 2018 willy and the lab01 project authors.
  * Licensed under GNU General Public License v3.0.
@@ -10,39 +10,39 @@
 package ast;
 
 /**
- * Instance of UnaryMinus.java
+ * Instance of UnaryMinus, represents a (-).
  * 
  * @author
- * @version
+ * @version 201802112359
  */
 public class UnaryMinus implements Expression {
 	
-	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 	private Expression expression;
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
+	 * Allocates a UnaryMinus object and initializes it.
 	 * 
-	 * @param i
-	 * @param j
-	 * @param variable
+	 * @param line where the unary minus is.
+	 * @param column where the unary minus is.
+	 * @param variable to apply the unary minus
 	 */
-	public UnaryMinus( int i, int j, Variable variable ) {
-		this.row = i;
-		this.column = j;
+	public UnaryMinus( int line, int column, Variable variable ) {
+		this.line = line;
+		this.column = column;
 		this.expression = variable;
 		
 	}
 
 	@Override public int getLine() {
-		return this.row;
+		return this.line;
 	}
 
 	@Override public int getColumn() {
 		return this.column;
 	}
 	
-	public String toString() {
+	@Override public String toString() {
 		return "-" + this.expression.toString();
 	}
 

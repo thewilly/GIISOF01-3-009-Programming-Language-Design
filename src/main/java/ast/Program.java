@@ -1,5 +1,5 @@
 /*
- * This source file is part of the lab01 open source project.
+ * This source file is part of the p--compiler open source project.
  *
  * Copyright (c) 2018 willy and the lab01 project authors.
  * Licensed under GNU General Public License v3.0.
@@ -12,46 +12,38 @@ package ast;
 import java.util.List;
 
 /**
- * Instance of Program.java
+ * A program represents a list of statements in the AST tree.
  * 
- * @author
- * @version
+ * @author Guillermo Facundo Colunga
+ * @version 201802112346
  */
 public class Program implements ASTNode, Statement {
 	
-	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 	@SuppressWarnings("unused") private List<Statement> statements;
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
+	 * Allocates a Program object and initializes it.
 	 * 
-	 * @param i
-	 * @param j
-	 * @param statements
+	 * @param line where the program statement is.
+	 * @param column where the program statement is.
+	 * @param statements is the list of statements.
 	 */
-	public Program( int i, int j, List<Statement> statements ) {
-		this.row = i;
-		this.column = j;
+	public Program( int line, int column, List<Statement> statements ) {
+		this.line = line;
+		this.column = column;
 		this.statements = statements;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see ast.ASTNode#getLine()
-	 */
 	@Override public int getLine() {
-		return this.row;
+		return this.line;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see ast.ASTNode#getColumn()
-	 */
 	@Override public int getColumn() {
 		return this.column;
 	}
 	
-	public String toString() {
+	@Override public String toString() {
 		return "Program";
 	}
 

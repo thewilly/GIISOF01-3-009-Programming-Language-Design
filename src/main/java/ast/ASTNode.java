@@ -10,24 +10,29 @@
 package ast;
 
 /**
- * Instance of ASTNode.java
+ * Instance of ASTNode java class, represents a node in the AST tree and
+ * therefore will declare those common methods to all nodes in the AST tree.
  * 
- * @author
- * @version
+ * @author Guillermo Facunod Colunga
+ * @version 201802112329
  */
 public interface ASTNode {
 
 	public final static int DEFAULT_ROW_COLUMN = -1;
 
 	/**
+	 * Gets the line where the element that is contained by the node is written.
 	 * 
-	 * @return
+	 * @return the line where the element that the node contains is written in
+	 *         the input file.
 	 */
 	public int getLine();
 
 	/**
+	 * Gets the column where the element that is contained by the node is written.
 	 * 
-	 * @return
+	 * @return the column where the element that the node contains is written in
+	 *         the input file.
 	 */
 	public int getColumn();
 

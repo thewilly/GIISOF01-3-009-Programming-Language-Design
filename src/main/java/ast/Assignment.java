@@ -1,5 +1,5 @@
 /*
- * This source file is part of the lab01 open source project.
+ * This source file is part of the p--compiler open source project.
  *
  * Copyright (c) 2018 willy and the lab01 project authors.
  * Licensed under GNU General Public License v3.0.
@@ -10,40 +10,40 @@
 package ast;
 
 /**
- * Instance of Assignment.java
+ * Instance of the Assignment statement. It assigns the value of the right node to the left node.
  * 
- * @author
- * @version
+ * @author Guillermo Facundo Colunga
+ * @version 201802112339
  */
 public class Assignment implements Statement {
 
 	private Expression left, right;
-	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
+	 * Allocates an assignment object and initializes it.
 	 * 
-	 * @param i
-	 * @param j
-	 * @param variable
-	 * @param arithmetic
+	 * @param line where the statement is.
+	 * @param column where the statement is.
+	 * @param left side of the assignment.
+	 * @param right side of the assignment.
 	 */
-	public Assignment( int i, int j, Variable variable, Arithmetic arithmetic ) {
-		this.row = i;
-		this.column = j;
-		this.left = variable;
-		this.right = arithmetic;
+	public Assignment( int line, int column, Variable left, Arithmetic right ) {
+		this.line = line;
+		this.column = column;
+		this.left = left;
+		this.right = right;
 	}
 
 	@Override public int getLine() {
-		return this.row;
+		return this.line;
 	}
 
 	@Override public int getColumn() {
 		return this.column;
 	}
 
-	public String toString() {
+	@Override public String toString() {
 		return this.left.toString() + "=" + this.right.toString();
 	}
 

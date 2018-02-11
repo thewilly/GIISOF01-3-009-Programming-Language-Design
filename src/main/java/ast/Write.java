@@ -1,5 +1,5 @@
 /*
- * This source file is part of the lab01 open source project.
+ * This source file is part of the p--compiler open source project.
  *
  * Copyright (c) 2018 willy and the lab01 project authors.
  * Licensed under GNU General Public License v3.0.
@@ -10,42 +10,38 @@
 package ast;
 
 /**
- * Instance of Write.java
+ * Instance of Write statement
  * 
  * @author
  * @version
  */
 public class Write implements Statement {
 	
-	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 	private Expression expression;
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
+	 * Allocates a write object and initializes it.
 	 * 
-	 * @param i
-	 * @param j
-	 * @param variable
+	 * @param line where the read statement is.
+	 * @param column where the variable is.
+	 * @param variable to write.
 	 */
-	public Write( int i, int j, Variable variable ) {
-		this.row = i;
-		this.column = j;
+	public Write( int line, int column, Variable variable ) {
+		this.line = line;
+		this.column = column;
 		this.expression = variable;
 	}
 
 	@Override public int getLine() {
-		return this.row;
+		return this.line;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see ast.ASTNode#getColumn()
-	 */
+	
 	@Override public int getColumn() {
 		return this.column;
 	}
 	
-	public String toString() {
+	@Override public String toString() {
 		return "print " + this.expression.toString();
 	}
 
