@@ -17,31 +17,37 @@ package ast;
  */
 public class IntLiteral implements Expression {
 
-	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN, value;
+    private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN, value;
 
-	/**
-	 * Allocates an integer literal object and initializes it.
-	 * 
-	 * @param line where the int literal is.
-	 * @param column where the int literal is.
-	 * @param value of the int literal.
-	 */
-	public IntLiteral( int line, int column, int value ) {
-		this.line = line;
-		this.column = column;
-		this.value = value;
-	}
+    /**
+     * Allocates an integer literal object and initializes it.
+     * 
+     * @param line
+     *            where the int literal is.
+     * @param column
+     *            where the int literal is.
+     * @param value
+     *            of the int literal.
+     */
+    public IntLiteral(int line, int column, int value) {
+	this.line = line;
+	this.column = column;
+	this.value = value;
+    }
 
-	@Override public int getLine() {
-		return this.line;
-	}
+    @Override
+    public int getLine() {
+	return this.line;
+    }
 
-	@Override public int getColumn() {
-		return this.column;
-	}
+    @Override
+    public int getColumn() {
+	return this.column;
+    }
 
-	@Override public String toString() {
-		return Integer.toString( this.value );
-	}
+    @Override
+    public String toString() {
+	return Integer.toString(this.value);
+    }
 
 }

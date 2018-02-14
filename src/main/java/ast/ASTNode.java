@@ -18,22 +18,22 @@ package ast;
  */
 public interface ASTNode {
 
-	public final static int DEFAULT_ROW_COLUMN = -1;
+    public final static int DEFAULT_ROW_COLUMN = -1;
 
-	/**
-	 * Gets the line where the element that is contained by the node is written.
-	 * 
-	 * @return the line where the element that the node contains is written in
-	 *         the input file.
-	 */
-	public int getLine();
+    /**
+     * Gets the line where the element that is contained by the node is written.
+     * 
+     * @return the line where the element that the node contains is written in the
+     *         input file.
+     */
+    public int getLine();
 
-	/**
-	 * Gets the column where the element that is contained by the node is written.
-	 * 
-	 * @return the column where the element that the node contains is written in
-	 *         the input file.
-	 */
-	public int getColumn();
+    /**
+     * Gets the column where the element that is contained by the node is written.
+     * 
+     * @return the column where the element that the node contains is written in the
+     *         input file.
+     */
+    public int getColumn();
 
 }

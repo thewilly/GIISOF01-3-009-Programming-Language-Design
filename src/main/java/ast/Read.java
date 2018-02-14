@@ -16,33 +16,39 @@ package ast;
  * @version 201802112355
  */
 public class Read implements Statement {
-	
-	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-	private Expression expression;
 
-	/**
-	 * Allocates a Read object and initializes.
-	 * 
-	 * @param line where the read statement is.
-	 * @param column where the read statement is.
-	 * @param variable to read.
-	 */
-	public Read( int line, int column, Variable variable ) {
-		this.line = line;
-		this.column = column;
-		this.expression = variable;
-	}
+    private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+    private Expression expression;
 
-	@Override public int getLine() {
-		return this.line;
-	}
+    /**
+     * Allocates a Read object and initializes.
+     * 
+     * @param line
+     *            where the read statement is.
+     * @param column
+     *            where the read statement is.
+     * @param variable
+     *            to read.
+     */
+    public Read(int line, int column, Variable variable) {
+	this.line = line;
+	this.column = column;
+	this.expression = variable;
+    }
 
-	@Override public int getColumn() {
-		return this.column;
-	}
-	
-	@Override public String toString() {
-		return "input " + this.expression.toString();
-	}
+    @Override
+    public int getLine() {
+	return this.line;
+    }
+
+    @Override
+    public int getColumn() {
+	return this.column;
+    }
+
+    @Override
+    public String toString() {
+	return "input " + this.expression.toString();
+    }
 
 }

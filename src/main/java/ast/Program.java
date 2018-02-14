@@ -18,33 +18,40 @@ import java.util.List;
  * @version 201802112346
  */
 public class Program implements ASTNode, Statement {
-	
-	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-	@SuppressWarnings("unused") private List<Statement> statements;
 
-	/**
-	 * Allocates a Program object and initializes it.
-	 * 
-	 * @param line where the program statement is.
-	 * @param column where the program statement is.
-	 * @param statements is the list of statements.
-	 */
-	public Program( int line, int column, List<Statement> statements ) {
-		this.line = line;
-		this.column = column;
-		this.statements = statements;
-	}
+    private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+    @SuppressWarnings("unused")
+    private List<Statement> statements;
 
-	@Override public int getLine() {
-		return this.line;
-	}
+    /**
+     * Allocates a Program object and initializes it.
+     * 
+     * @param line
+     *            where the program statement is.
+     * @param column
+     *            where the program statement is.
+     * @param statements
+     *            is the list of statements.
+     */
+    public Program(int line, int column, List<Statement> statements) {
+	this.line = line;
+	this.column = column;
+	this.statements = statements;
+    }
 
-	@Override public int getColumn() {
-		return this.column;
-	}
-	
-	@Override public String toString() {
-		return "Program";
-	}
+    @Override
+    public int getLine() {
+	return this.line;
+    }
+
+    @Override
+    public int getColumn() {
+	return this.column;
+    }
+
+    @Override
+    public String toString() {
+	return "Program";
+    }
 
 }
