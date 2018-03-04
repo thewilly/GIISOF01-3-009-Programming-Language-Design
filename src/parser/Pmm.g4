@@ -10,6 +10,7 @@ program returns [Program ast]
  : {List<Definition> defs = new ArrayList<Definition>();}((var_def';'){defs.addAll($var_def.ast);}|func_def{defs.add($func_def.ast);})* main_def{defs.add($main_def.ast);$ast = new Program(0,0,defs);}
  ;
 
+
 // --------------------------
 // BUILT-IN
 // --------------------------
@@ -200,25 +201,9 @@ var_invocation returns [Expression ast]
  ;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Tokens.
+ // --------------------------
+ // TOKENS
+ // --------------------------
 
 SKIP_
  : ( WHITE_SPACE | ONE_LINE_COMMENT | MULTI_LINE_COMMENT ) -> skip
