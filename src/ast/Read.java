@@ -27,13 +27,13 @@ public class Read implements Statement {
      *            where the read statement is.
      * @param column
      *            where the read statement is.
-     * @param variable
+     * @param expression
      *            to read.
      */
-    public Read(int line, int column, Variable variable) {
+    public Read(int line, int column, Expression expression) {
 	this.line = line;
 	this.column = column;
-	this.expression = variable;
+	this.expression = expression;
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Write implements Statement {
      * @param variable
      *            to write.
      */
-    public Write(int line, int column, Variable variable) {
+    public Write(int line, int column, Expression variable) {
 	this.line = line;
 	this.column = column;
 	this.expression = variable;

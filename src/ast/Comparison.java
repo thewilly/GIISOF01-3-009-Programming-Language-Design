@@ -1,6 +1,6 @@
 package ast;
 
-public class Comparison implements Expression {
+public class Comparison implements Expression, Statement {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
     

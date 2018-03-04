@@ -1,6 +1,3 @@
-# Variable and function definitions
-i, j, n: int;
-c:char;
-z:int;
-d:double;
-def main():void {}
+def main():void {
+ a.b = 4;
+}

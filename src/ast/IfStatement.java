@@ -60,7 +60,7 @@ public class IfStatement implements Statement {
 	    ifStatement.append("\n \t" + statement.toString());
 	}
 
-	if (!elseBody.isEmpty()) {
+	if (elseBody!=null && !elseBody.isEmpty()) {
 	    ifStatement.append("\n else :");
 	    for (Statement statement : this.getElseBody()) {
 		ifStatement.append("\n \t" + statement.toString());

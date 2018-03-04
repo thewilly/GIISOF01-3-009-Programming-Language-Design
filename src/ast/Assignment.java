@@ -33,7 +33,7 @@ public class Assignment implements Statement {
      * @param right
      *            side of the assignment.
      */
-    public Assignment(int line, int column, Variable left, Arithmetic right) {
+    public Assignment(int line, int column, Expression left, Expression right) {
 	this.line = line;
 	this.column = column;
 	this.left = left;

@@ -1,50 +1,90 @@
-# Variable and function definitions
-i, j, n: int;
-c: char;
+"""
+	Control Test
+	PLD 17/18
+"""
 
-# Empty function
-def p(): void { }
+# Global variables
+integer:int;
+character:char;
+real:double;
 
-def f(n: int,r: double): int {
-  	real: double;
-  	c1, c2: char;  
-	c1 = (char)n;
-  	real = c1 + n + r;
-  	p(); # Invocation as a statement
-  	return (int)c1;
+MATRIXSIZE:int;
+matrix:[10][10]int;
+
+# Functions
+def setValue(row:int, columnn:int, value:int):void {
+	if row >= 0 && row < MATRIXSIZE && columnn >= 0 && columnn < MATRIXSIZE: {
+		matrix[row][column] = value;
+	}
 }
-
-def main(): void {
-	# Record
-  	pair: struct {
-    	integer: int;
-    	character: char;
-  	};
-  	
-  	# Array
-  	vector: [10][5]double;
-  	  
-  	i=0;
-  	j=0;
-  	while i<10 : {
-    	while j<5 : {
-      		vector[i][j] = i + j;
-      		j=j+1;
+def getValue(row:int, columnn:int):int {
+	if (row < 0 || row >= MATRIXSIZE) || (columnn < 0 && columnn >= MATRIXSIZE): {
+		return -1;
+	}
+	else {	
+		return matrix[row][column];
+	}
+}
+def fill(value:int):void {
+	i,j:int;  # Multiple variable definition
+	i = 0;	
+	while i < MATRIXSIZE: {
+		j = 0;
+		while j < MATRIXSIZE: {
+			setValue(i,j, value);
+			j = j + 1;
 		}
-		i=i+1;
-  	} 	
-  	
-  	i=0;
-	pair.character = '0';
-  	pair.integer = '0';
-  	while pair.integer >= i: {
-    	if pair.integer == vector[0][0] || !pair.character || i%2==0 :
-      		print 't', 'r', 'u', 'e', '\n';
-    	else 
-      		print 'f', 'a', 'l', 's', 'e', '\n';
-    	i=i+1;
-  	}
-  	print f(i, (double)i); # Invocation as an expression
-  	vector[9][(int)4.3] = 5.6;
-  	f(1, 2.2); # Invocation as a statement
+		i = i + 1;
+	}
 }
+def show():void {
+	i,j:int;
+	i = 0;	
+	print '[','\n';
+	while i < MATRIXSIZE: {
+		j = 0;
+		print '\t','[';
+		while j < MATRIXSIZE: {
+			print getValue(i,j);
+			if j != MATRIXSIZE - 1: {
+				print ',';
+			}
+			j = j + 1;
+		}
+		print ']','\n';	
+		i = i + 1;
+	}	
+	print ']';	
+}
+
+# Record
+date:struct { 
+	day, mounth, year:int;	
+};
+
+# Main program
+# def no_main ():void{ # Uncomment to test
+def main():void { # Uncomment to test
+	characters:[1][2][3]char;
+	MATRIXSIZE = 10;
+	fill(1);
+	setValue(5,5,5);
+	integer = getValue(5,5);
+	if integer == 5: { # Uncomment { to test
+		print 'O','k','\n';
+	}
+	else {
+		print 'E','r','r','o','r','\n';
+	}
+	show();
+	
+	date.day = 9;
+	date.mounth = 3;
+	date.year = 2016;
+	
+	character = (char)date.day;
+	real = 4.5 + 4. * 3e+3 - 5.4E-3;
+	
+	#error:int; # Uncomment to test
+}
+# def no_function():void {} # Uncomment to test

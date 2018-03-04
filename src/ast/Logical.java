@@ -1,6 +1,6 @@
 package ast;
 
-public class Logical implements Expression {
+public class Logical implements Expression, Statement {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 

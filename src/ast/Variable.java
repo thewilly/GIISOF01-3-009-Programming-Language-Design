@@ -27,13 +27,13 @@ public class Variable implements Expression {
      *            where the variable is.
      * @param column
      *            where the variable is.
-     * @param string
+     * @param name
      *            that represents the lexeme of the variable.
      */
-    public Variable(int line, int column, String string) {
+    public Variable(int line, int column, String name) {
 	this.line = line;
 	this.column = column;
-	this.name = string;
+	this.name = name;
     }
 
     @Override

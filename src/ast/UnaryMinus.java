@@ -30,7 +30,7 @@ public class UnaryMinus implements Expression {
      * @param variable
      *            to apply the unary minus
      */
-    public UnaryMinus(int line, int column, Variable variable) {
+    public UnaryMinus(int line, int column, Expression variable) {
 	this.line = line;
 	this.column = column;
 	this.expression = variable;
