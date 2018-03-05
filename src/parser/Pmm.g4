@@ -7,7 +7,7 @@ grammar Pmm;
 
 // Sequence of variable and function definitions and a main function definition.
 program returns [Program ast]
- : {List<Definition> defs = new ArrayList<Definition>();}((var_def';'){defs.addAll($var_def.ast);}|func_def{defs.add($func_def.ast);})* main_def{defs.add($main_def.ast);$ast = new Program(0,0,defs);}
+ : {List<Definition> defs = new ArrayList<Definition>();}((var_def';'){defs.addAll($var_def.ast);}|func_def{defs.add($func_def.ast);})* main_def EOF{defs.add($main_def.ast);$ast = new Program(0,0,defs);}
  ;
 
 
@@ -63,7 +63,7 @@ func_def returns [FuncDefinition ast]
 // Is the last mandatory function in every program.
 // Always no parameters and void return type;
 main_def returns [Definition ast]
- : 'def' 'main' '('')' ':' 'void' '{' func_body '}'{ $ast = new FuncDefinition($start.getLine(), $start.getCharPositionInLine()+1, "main", VoidType.getInstance(), $func_body.ast); }
+ : {List<VarDefinition> null_list = new ArrayList<VarDefinition>();}'def' 'main' '('')' ':' 'void' '{' func_body '}'{ $ast = new FuncDefinition($start.getLine(), $start.getCharPositionInLine()+1, "main", new FunctionType($start.getLine(), $start.getCharPositionInLine()+1, VoidType.getInstance(), null_list), $func_body.ast); }
  ;
 
 //
