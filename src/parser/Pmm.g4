@@ -3,6 +3,7 @@ grammar Pmm;
 @header {
   import ast.*;
   import java.util.*;
+  import errorhandler.ErrorType;
 }
 
 // Sequence of variable and function definitions and a main function definition.
@@ -39,12 +40,12 @@ single_var_def returns [VarDefinition ast]
 
 // When we have an enumeration of variable and a definition.
 multi_var_def returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
- : id1=ID {$ast.add(new VarDefinition($id1.line, $id1.pos+1, $id1.text, null));}(','id2=ID {$ast.add(new VarDefinition($id2.line, $id2.pos+1, $id2.text, null));})+ ':' build_in_type {for(Definition def : $ast) {def.setType($build_in_type.ast);}}
+ : id1=ID {$ast.add(new VarDefinition($id1.line, $id1.pos+1, $id1.text, null));}(','id2=ID {if($ast.contains(new VarDefinition($id2.line, $id2.pos+1, $id2.text, null))){new ErrorType($id2.line, $id2.pos+1, "Duplicate variable definition error: " + $id2.text);}else{$ast.add(new VarDefinition($id2.line, $id2.pos+1, $id2.text, null));}})+ ':' build_in_type {for(Definition def : $ast) {def.setType($build_in_type.ast);}}
  ;
 
 // Declared as a variable and ending with ';' always.
 fields returns [List<RecordField> ast = new ArrayList<RecordField>()]
- : (var_def {for(Definition def : $var_def.ast) {$ast.add(new RecordField(def.getLine(), def.getColumn(), def.getName(), def.getType(), 0));}}';')+
+ : (var_def {for(Definition def : $var_def.ast) {if($ast.contains(new RecordField(def.getLine(), def.getColumn(), def.getName(), def.getType(), 0))) {new ErrorType(def.getLine(), def.getColumn(), "Duplicate field error: " + def.getName());} else {$ast.add(new RecordField(def.getLine(), def.getColumn(), def.getName(), def.getType(), 0));}}}';')+
  ;
 
 

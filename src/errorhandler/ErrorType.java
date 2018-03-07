@@ -27,12 +27,14 @@ public class ErrorType implements Type {
     public ErrorType(ASTNode node, String message) {
 	this.node = node;
 	this.message = message;
+	EH.getInstance().addError(this);
     }
     
     public ErrorType(int row, int column, String message) {
 	this.line = row;
 	this.column = column;
 	this.message = message;
+	EH.getInstance().addError(this);
     }
     
     public ASTNode getNode() {

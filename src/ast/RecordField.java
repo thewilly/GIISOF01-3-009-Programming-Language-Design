@@ -54,4 +54,13 @@ public class RecordField implements ASTNode {
     public String toString() {
 	return this.name + ":" + this.type.toString();
     }
+    
+    @Override
+    public boolean equals(Object other) {
+	if(other == null) return false;
+	if (!(other instanceof RecordField)) return false;
+	RecordField otherField = (RecordField) other;
+	if(this.getName().equals(otherField.getName())) return true;
+	return false;
+    }
 }

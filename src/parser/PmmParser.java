@@ -3,6 +3,7 @@ package parser;
 
   import ast.*;
   import java.util.*;
+  import errorhandler.ErrorType;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -432,7 +433,7 @@ public class PmmParser extends Parser {
 				match(T__10);
 				setState(117);
 				((Multi_var_defContext)_localctx).id2 = match(ID);
-				_localctx.ast.add(new VarDefinition((((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getLine():0), (((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getCharPositionInLine():0)+1, (((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getText():null), null));
+				if(_localctx.ast.contains(new VarDefinition((((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getLine():0), (((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getCharPositionInLine():0)+1, (((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getText():null), null))){new ErrorType((((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getLine():0), (((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getCharPositionInLine():0)+1, "Duplicate variable definition error: " + (((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getText():null));}else{_localctx.ast.add(new VarDefinition((((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getLine():0), (((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getCharPositionInLine():0)+1, (((Multi_var_defContext)_localctx).id2!=null?((Multi_var_defContext)_localctx).id2.getText():null), null));}
 				}
 				}
 				setState(121); 
@@ -487,7 +488,7 @@ public class PmmParser extends Parser {
 				{
 				setState(127);
 				((FieldsContext)_localctx).var_def = var_def();
-				for(Definition def : ((FieldsContext)_localctx).var_def.ast) {_localctx.ast.add(new RecordField(def.getLine(), def.getColumn(), def.getName(), def.getType(), 0));}
+				for(Definition def : ((FieldsContext)_localctx).var_def.ast) {if(_localctx.ast.contains(new RecordField(def.getLine(), def.getColumn(), def.getName(), def.getType(), 0))) {new ErrorType(def.getLine(), def.getColumn(), "Duplicate field error: " + def.getName());} else {_localctx.ast.add(new RecordField(def.getLine(), def.getColumn(), def.getName(), def.getType(), 0));}}
 				setState(129);
 				match(T__0);
 				}

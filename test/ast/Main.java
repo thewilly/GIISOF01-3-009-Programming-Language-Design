@@ -5,6 +5,7 @@ import parser.*;
 import org.antlr.v4.runtime.*;
 
 import ast.Program;
+import errorhandler.EH;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
 
@@ -25,8 +26,15 @@ public class Main {
 		PmmParser parser = new PmmParser(tokens);	
 		Program ast = parser.program().ast;
 		
-		// * The AST is shown
-		IntrospectorModel model=new IntrospectorModel("Program", ast);
-		new IntrospectorTree("Introspector", model);
+		// * Check errors 
+		if(EH.getInstance().hasErrors()){
+			// * Show errors
+			EH.getInstance().showErrors(System.err);
+		}
+		else{			
+			// * The AST is shown
+			IntrospectorModel model=new IntrospectorModel("Program", ast);
+			new IntrospectorTree("Introspector", model);
+		}		
 	}
 }

@@ -2,11 +2,9 @@ package ast;
 
 public class VarDefinition implements Definition, Statement {
 
-    private int row = ASTNode.DEFAULT_ROW_COLUMN;
-    private int column = ASTNode.DEFAULT_ROW_COLUMN;
+    private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 
-    private int scope = 0;
-    private int offset;
+    private int scope = 0, offset;
     private String name;
     private Type type;
 
@@ -68,5 +66,13 @@ public class VarDefinition implements Definition, Statement {
     @Override
     public String toString() {
 	return this.name + ":" + this.type;
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+	if(other == null) return false;
+	if(! (other instanceof VarDefinition)) return false;
+	VarDefinition variable = (VarDefinition) other;
+	return (this.getName().equals(variable.getName()) && this.getScope()==variable.getScope());
     }
 }

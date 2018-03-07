@@ -3,6 +3,7 @@ package parser;
 
   import ast.*;
   import java.util.*;
+  import errorhandler.ErrorType;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
