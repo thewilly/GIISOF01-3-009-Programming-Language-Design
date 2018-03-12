@@ -9,6 +9,8 @@
  */
 package ast;
 
+import visitor.Visitor;
+
 /**
  * Instance of the read statement.
  * 
@@ -35,6 +37,10 @@ public class Read implements Statement {
 	this.column = column;
 	this.expression = expression;
     }
+    
+    public Expression getExpression() {
+	return this.expression;
+    }
 
     @Override
     public int getLine() {
@@ -49,6 +55,14 @@ public class Read implements Statement {
     @Override
     public String toString() {
 	return "input " + this.expression.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

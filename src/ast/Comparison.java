@@ -1,9 +1,11 @@
 package ast;
 
-public class Comparison implements Expression, Statement {
+import visitor.Visitor;
+
+public class Comparison extends AbstractExpression implements Statement {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-    
+
     private Expression left, right;
     private String comparator;
 
@@ -52,7 +54,7 @@ public class Comparison implements Expression, Statement {
     public void setComparator(String comparator) {
 	this.comparator = comparator;
     }
-    
+
     @Override
     public int getLine() {
 	return column;
@@ -62,10 +64,18 @@ public class Comparison implements Expression, Statement {
     public int getColumn() {
 	return row;
     }
-    
+
     @Override
     public String toString() {
 	return this.left.toString() + this.comparator + this.right.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

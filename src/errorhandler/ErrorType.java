@@ -11,6 +11,7 @@ package errorhandler;
 
 import ast.ASTNode;
 import ast.Type;
+import visitor.Visitor;
 
 /**
  * Instance of ErrorType.java
@@ -23,42 +24,42 @@ public class ErrorType implements Type {
     private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
     private ASTNode node;
     private String message;
-    
+
     public ErrorType(ASTNode node, String message) {
 	this.node = node;
 	this.message = message;
 	EH.getInstance().addError(this);
     }
-    
+
     public ErrorType(int row, int column, String message) {
 	this.line = row;
 	this.column = column;
 	this.message = message;
 	EH.getInstance().addError(this);
     }
-    
+
     public ASTNode getNode() {
 	return this.node;
     }
-    
+
     public void setNode(ASTNode node) {
 	this.node = node;
     }
-    
+
     public String getMessage() {
 	return this.message;
     }
-    
+
     public void setMessage(String message) {
 	this.message = message;
     }
-    
+
     /**
      * @see ast.ASTNode#getLine()
      */
     @Override
     public int getLine() {
-	if(node==null)
+	if (node == null)
 	    return this.line;
 	return node.getLine();
     }
@@ -68,9 +69,17 @@ public class ErrorType implements Type {
      */
     @Override
     public int getColumn() {
-	if(node==null)
+	if (node == null)
 	    return this.column;
 	return node.getColumn();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

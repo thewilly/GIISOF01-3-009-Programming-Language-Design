@@ -1,9 +1,11 @@
 package ast;
 
-public class CharLiteral implements Expression {
+import visitor.Visitor;
+
+public class CharLiteral extends AbstractExpression {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-    
+
     private char value;
 
     public CharLiteral(int row, int column, char value) {
@@ -40,6 +42,14 @@ public class CharLiteral implements Expression {
     @Override
     public String toString() {
 	return Character.toString(value);
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

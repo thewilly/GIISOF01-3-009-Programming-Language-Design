@@ -9,6 +9,8 @@
  */
 package ast;
 
+import visitor.Visitor;
+
 /**
  * Instance of Arithmetic expression, defined by an expression, am arithmetic
  * operator and another expression.
@@ -16,7 +18,7 @@ package ast;
  * @author Guillermo Facundo Colunga
  * @version 201802112314
  */
-public class Arithmetic implements Expression {
+public class Arithmetic extends AbstractExpression {
 
     private Expression left, right;
     private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
@@ -58,33 +60,43 @@ public class Arithmetic implements Expression {
      * @return the left
      */
     public Expression getLeft() {
-        return left;
+	return left;
     }
 
     /**
-     * @param left the left to set
+     * @param left
+     *            the left to set
      */
     public void setLeft(Expression left) {
-        this.left = left;
+	this.left = left;
     }
 
     /**
      * @return the right
      */
     public Expression getRight() {
-        return right;
+	return right;
     }
 
     /**
-     * @param right the right to set
+     * @param right
+     *            the right to set
      */
     public void setRight(Expression right) {
-        this.right = right;
+	this.right = right;
     }
 
     @Override
     public String toString() {
 	return left.toString() + operator + right.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

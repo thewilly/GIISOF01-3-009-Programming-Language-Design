@@ -1,6 +1,8 @@
 package ast;
 
-public class Cast implements Expression {
+import visitor.Visitor;
+
+public class Cast extends AbstractExpression {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 
@@ -55,5 +57,13 @@ public class Cast implements Expression {
     @Override
     public String toString() {
 	return "(" + this.castType.toString() + ")" + this.expresion.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 }

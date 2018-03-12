@@ -1,12 +1,15 @@
 package ast;
 
+import visitor.Visitor;
+
 public class VoidType implements Type {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 
     private static VoidType instance = new VoidType();
 
-    private VoidType() {}
+    private VoidType() {
+    }
 
     public static VoidType getInstance() {
 	// Never its gonna be null but just in case we check.
@@ -40,6 +43,14 @@ public class VoidType implements Type {
     @Override
     public String toString() {
 	return "void";
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

@@ -1,6 +1,8 @@
 package ast;
 
-public class FieldAccess implements Expression {
+import visitor.Visitor;
+
+public class FieldAccess extends AbstractExpression {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
     private Expression expresion;
@@ -54,6 +56,14 @@ public class FieldAccess implements Expression {
     @Override
     public String toString() {
 	return this.expresion.toString() + "." + this.name;
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

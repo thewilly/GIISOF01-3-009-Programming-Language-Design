@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class ArrayType implements Type {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
@@ -52,6 +54,14 @@ public class ArrayType implements Type {
     @Override
     public String toString() {
 	return "[" + this.offset + "]" + this.arrayType.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

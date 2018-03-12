@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class VarDefinition implements Definition, Statement {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
@@ -67,12 +69,22 @@ public class VarDefinition implements Definition, Statement {
     public String toString() {
 	return this.name + ":" + this.type;
     }
-    
+
     @Override
     public boolean equals(Object other) {
-	if(other == null) return false;
-	if(! (other instanceof VarDefinition)) return false;
+	if (other == null)
+	    return false;
+	if (!(other instanceof VarDefinition))
+	    return false;
 	VarDefinition variable = (VarDefinition) other;
-	return (this.getName().equals(variable.getName()) && this.getScope()==variable.getScope());
+	return (this.getName().equals(variable.getName()) && this.getScope() == variable.getScope());
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 }

@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Return implements Statement {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
@@ -45,5 +47,13 @@ public class Return implements Statement {
     @Override
     public String toString() {
 	return "return " + this.expression.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 }

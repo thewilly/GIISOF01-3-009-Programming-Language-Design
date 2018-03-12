@@ -9,6 +9,8 @@
  */
 package ast;
 
+import visitor.Visitor;
+
 /**
  * Instance of ASTNode java class, represents a node in the AST tree and
  * therefore will declare those common methods to all nodes in the AST tree.
@@ -35,5 +37,14 @@ public interface ASTNode {
      *         input file.
      */
     public int getColumn();
+    
+    /**
+     * Accept method for the visitor template.
+     * 
+     * @param visitor to accept.
+     * @param param to pass to the visitor.
+     * @return a return type if need.
+     */
+    public <P,R> R accept(Visitor<P,R> visitor, P param);
 
 }

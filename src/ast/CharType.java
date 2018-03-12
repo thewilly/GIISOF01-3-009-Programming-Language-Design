@@ -1,12 +1,15 @@
 package ast;
 
+import visitor.Visitor;
+
 public class CharType implements Type {
-    
+
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 
     private static CharType instance = new CharType();
 
-    private CharType() {}
+    private CharType() {
+    }
 
     public static CharType getInstance() {
 	if (instance == null)
@@ -23,7 +26,7 @@ public class CharType implements Type {
     public int getColumn() {
 	return column;
     }
-    
+
     public int getRow() {
 	return this.row;
     }
@@ -39,6 +42,14 @@ public class CharType implements Type {
     @Override
     public String toString() {
 	return "char";
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

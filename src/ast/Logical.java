@@ -1,6 +1,8 @@
 package ast;
 
-public class Logical implements Expression, Statement {
+import visitor.Visitor;
+
+public class Logical extends AbstractExpression implements Statement {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 
@@ -66,6 +68,14 @@ public class Logical implements Expression, Statement {
     @Override
     public String toString() {
 	return this.left.toString() + this.operator + this.right.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

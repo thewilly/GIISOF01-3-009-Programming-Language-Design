@@ -9,13 +9,15 @@
  */
 package ast;
 
+import visitor.Visitor;
+
 /**
  * Instance of the Variable type.
  * 
  * @author Guillermo Facundo Colunga
  * @version 201802120001
  */
-public class Variable implements Expression {
+public class Variable extends AbstractExpression {
 
     private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
     private String name;
@@ -49,6 +51,14 @@ public class Variable implements Expression {
     @Override
     public String toString() {
 	return this.name;
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

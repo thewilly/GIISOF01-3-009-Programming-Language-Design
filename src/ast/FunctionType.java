@@ -2,6 +2,8 @@ package ast;
 
 import java.util.List;
 
+import visitor.Visitor;
+
 public class FunctionType implements Type {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
@@ -54,17 +56,25 @@ public class FunctionType implements Type {
     public String toString() {
 	StringBuilder functionType = new StringBuilder();
 	functionType.append("(");
-	
+
 	for (VarDefinition varDef : this.getParameters()) {
-	    if(varDef.equals(this.getParameters().get(0)))
+	    if (varDef.equals(this.getParameters().get(0)))
 		functionType.append(varDef.toString());
 	    else
 		functionType.append(", " + varDef.toString());
 	}
-	
+
 	functionType.append("):");
 	functionType.append(getReturnType().toString());
-	
+
 	return functionType.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 }

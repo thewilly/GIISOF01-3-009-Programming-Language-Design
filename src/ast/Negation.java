@@ -1,9 +1,11 @@
 package ast;
 
-public class Negation implements Expression {
+import visitor.Visitor;
+
+public class Negation extends AbstractExpression {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-    
+
     private Expression expresion;
 
     public Negation(int row, int column, Expression expresion) {
@@ -40,6 +42,14 @@ public class Negation implements Expression {
     @Override
     public String toString() {
 	return "!" + this.expresion.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

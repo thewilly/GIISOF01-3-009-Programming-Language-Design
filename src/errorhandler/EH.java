@@ -23,26 +23,26 @@ public class EH {
 
     private List<ErrorType> errors = new ArrayList<ErrorType>();
     private static EH instance;
-    
+
     public static EH getInstance() {
-	if(instance == null) {
+	if (instance == null) {
 	    return instance = new EH();
 	}
 	return instance;
     }
-    
+
     public boolean hasErrors() {
 	return !errors.isEmpty();
     }
-    
+
     public void addError(ErrorType error) {
 	errors.add(error);
     }
-    
+
     public void showErrors(PrintStream stream) {
-	for(ErrorType error : errors) {
-	    stream.println("EERROR : At "+error.getLine()+", "+error.getColumn()+". "+error.getMessage());
+	for (ErrorType error : errors) {
+	    stream.println("EERROR : At " + error.getLine() + ", " + error.getColumn() + ". " + error.getMessage());
 	}
     }
-    
+
 }

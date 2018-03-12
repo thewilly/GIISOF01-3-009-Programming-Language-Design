@@ -2,6 +2,8 @@ package ast;
 
 import java.util.List;
 
+import visitor.Visitor;
+
 public class FuncDefinition implements Definition, Statement {
 
     private List<Statement> statements;
@@ -28,7 +30,7 @@ public class FuncDefinition implements Definition, Statement {
     public Type getType() {
 	return type;
     }
-    
+
     public void setType(Type type) {
 	this.type = type;
     }
@@ -60,6 +62,14 @@ public class FuncDefinition implements Definition, Statement {
 	}
 	funcDef.append("\n}");
 	return funcDef.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

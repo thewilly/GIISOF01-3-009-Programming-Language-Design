@@ -1,9 +1,11 @@
 package ast;
 
-public class RealLiteral implements Expression {
+import visitor.Visitor;
+
+public class RealLiteral extends AbstractExpression {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-    
+
     private double value;
 
     public RealLiteral(int i, int j, double value) {
@@ -40,6 +42,14 @@ public class RealLiteral implements Expression {
     @Override
     public String toString() {
 	return Double.toString(value);
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

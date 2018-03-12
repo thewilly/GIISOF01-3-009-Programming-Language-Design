@@ -9,13 +9,15 @@
  */
 package ast;
 
+import visitor.Visitor;
+
 /**
  * Represents an integer literal value in the AST tree.
  * 
  * @author Guillermo Facundo Colunga
  * @version 201802112344
  */
-public class IntLiteral implements Expression {
+public class IntLiteral extends AbstractExpression {
 
     private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN, value;
 
@@ -48,6 +50,14 @@ public class IntLiteral implements Expression {
     @Override
     public String toString() {
 	return Integer.toString(this.value);
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

@@ -9,6 +9,8 @@
  */
 package ast;
 
+import visitor.Visitor;
+
 /**
  * Instance of the Assignment statement. It assigns the value of the right node
  * to the left node.
@@ -39,6 +41,14 @@ public class Assignment implements Statement {
 	this.left = left;
 	this.right = right;
     }
+    
+    public Expression getLeft() {
+	return this.left;
+    }
+    
+    public Expression getRight() {
+	return this.right;
+    }
 
     @Override
     public int getLine() {
@@ -53,6 +63,14 @@ public class Assignment implements Statement {
     @Override
     public String toString() {
 	return this.left.toString() + "=" + this.right.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

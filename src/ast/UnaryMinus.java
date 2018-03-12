@@ -9,13 +9,15 @@
  */
 package ast;
 
+import visitor.Visitor;
+
 /**
  * Instance of UnaryMinus, represents a (-).
  * 
  * @author
  * @version 201802112359
  */
-public class UnaryMinus implements Expression {
+public class UnaryMinus extends AbstractExpression {
 
     private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
     private Expression expression;
@@ -36,6 +38,10 @@ public class UnaryMinus implements Expression {
 	this.expression = variable;
 
     }
+    
+    public Expression getExpression() {
+	return this.expression;
+    }
 
     @Override
     public int getLine() {
@@ -50,6 +56,14 @@ public class UnaryMinus implements Expression {
     @Override
     public String toString() {
 	return "-" + this.expression.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

@@ -1,12 +1,15 @@
 package ast;
 
+import visitor.Visitor;
+
 public class IntType implements Type {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 
     private static IntType instance = new IntType();
 
-    private IntType() {}
+    private IntType() {
+    }
 
     public static IntType getInstance() {
 	if (instance == null)
@@ -39,5 +42,13 @@ public class IntType implements Type {
     @Override
     public String toString() {
 	return "int";
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 }

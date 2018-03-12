@@ -1,6 +1,8 @@
 package ast;
 
-public class Indexing implements Expression {
+import visitor.Visitor;
+
+public class Indexing extends AbstractExpression {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
     private Expression left, right;
@@ -41,5 +43,13 @@ public class Indexing implements Expression {
     @Override
     public String toString() {
 	return this.left.toString() + "[" + this.right.toString() + "]";
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 }

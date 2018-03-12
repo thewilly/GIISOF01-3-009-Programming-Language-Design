@@ -11,6 +11,8 @@ package ast;
 
 import java.util.List;
 
+import visitor.Visitor;
+
 /**
  * A program represents a list of statements in the AST tree.
  * 
@@ -20,7 +22,7 @@ import java.util.List;
 public class Program implements ASTNode, Statement {
 
     private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-    
+
     @SuppressWarnings("unused")
     private List<Definition> definitions;
 
@@ -39,6 +41,10 @@ public class Program implements ASTNode, Statement {
 	this.column = column;
 	this.definitions = definitions;
     }
+    
+    public List<Definition> getDefinitions() {
+	return this.definitions;
+    }
 
     @Override
     public int getLine() {
@@ -53,6 +59,14 @@ public class Program implements ASTNode, Statement {
     @Override
     public String toString() {
 	return "Program";
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 
 }

@@ -2,6 +2,8 @@ package ast;
 
 import java.util.List;
 
+import visitor.Visitor;
+
 public class WhileStatement implements Statement {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
@@ -58,13 +60,21 @@ public class WhileStatement implements Statement {
     @Override
     public String toString() {
 	StringBuilder whileStmt = new StringBuilder();
-	
+
 	whileStmt.append("while " + this.condition + ":");
 	for (Statement s : this.getBody()) {
 	    whileStmt.append("\n \t" + s.toString());
 	}
 	whileStmt.append("\n}");
-	
+
 	return whileStmt.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+     */
+    @Override
+    public <P, R> R accept(Visitor<P, R> visitor, P param) {
+	return visitor.visit(this, param);
     }
 }
