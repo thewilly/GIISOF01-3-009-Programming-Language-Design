@@ -34,6 +34,7 @@ import ast.RecordField;
 import ast.RecordType;
 import ast.Return;
 import ast.UnaryMinus;
+import ast.UnaryNot;
 import ast.VarDefinition;
 import ast.Variable;
 import ast.VoidType;
@@ -223,6 +224,13 @@ public interface Visitor<P, R> {
      * @return
      */
     R visit(UnaryMinus unaryMinus, P param);
+    
+    /**
+     * @param unaryMinus
+     * @param param
+     * @return
+     */
+    R visit(UnaryNot unaryNot, P param);
 
     /**
      * @param varDefinition

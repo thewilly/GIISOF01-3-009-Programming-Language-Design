@@ -19,46 +19,57 @@ import visitor.Visitor;
  */
 public class Variable extends AbstractExpression {
 
-    private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-    private String name;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	private String name;
+	private Definition definition;
 
-    /**
-     * Allocates a variable object and initializes it.
-     * 
-     * @param line
-     *            where the variable is.
-     * @param column
-     *            where the variable is.
-     * @param name
-     *            that represents the lexeme of the variable.
-     */
-    public Variable(int line, int column, String name) {
-	this.line = line;
-	this.column = column;
-	this.name = name;
-    }
+	/**
+	 * Allocates a variable object and initializes it.
+	 * 
+	 * @param line where the variable is.
+	 * @param column where the variable is.
+	 * @param name that represents the lexeme of the variable.
+	 */
+	public Variable( int line, int column, String name ) {
+		this.line = line;
+		this.column = column;
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
 
-    @Override
-    public int getLine() {
-	return this.line;
-    }
+	public Definition getDefinition() {
+		return this.definition;
+	}
 
-    @Override
-    public int getColumn() {
-	return this.column;
-    }
+	public void setDefinition( Definition definition ) {
+		this.definition = definition;
+	}
 
-    @Override
-    public String toString() {
-	return this.name;
-    }
+	@Override
+	public int getLine() {
+		return this.line;
+	}
 
-    /* (non-Javadoc)
-     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
-     */
-    @Override
-    public <P, R> R accept(Visitor<P, R> visitor, P param) {
-	return visitor.visit(this, param);
-    }
+	@Override
+	public int getColumn() {
+		return this.column;
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+	 */
+	@Override
+	public <P, R> R accept( Visitor<P, R> visitor, P param ) {
+		return visitor.visit( this, param );
+	}
 
 }

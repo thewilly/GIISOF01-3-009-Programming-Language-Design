@@ -1,8 +1,11 @@
-# Lvalue required
+integer:int;
+character:char;
+real:double;
 
 def main():void {
-	i:int;
-	(i+2) = 3;
-	v[(int)(v[j])] = a;
-	v[2] + 4 = b
+  input integer; 
+  character = 8.5;	# Error 1
+  3 = integer;		# Error 2
+  input integer+2; 	# Error 3
 }
+

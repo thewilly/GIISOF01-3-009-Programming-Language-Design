@@ -19,50 +19,48 @@ import visitor.Visitor;
  */
 public class Read implements Statement {
 
-    private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-    private Expression expression;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	private Expression expression;
 
-    /**
-     * Allocates a Read object and initializes.
-     * 
-     * @param line
-     *            where the read statement is.
-     * @param column
-     *            where the read statement is.
-     * @param expression
-     *            to read.
-     */
-    public Read(int line, int column, Expression expression) {
-	this.line = line;
-	this.column = column;
-	this.expression = expression;
-    }
-    
-    public Expression getExpression() {
-	return this.expression;
-    }
+	/**
+	 * Allocates a Read object and initializes.
+	 * 
+	 * @param line where the read statement is.
+	 * @param column where the read statement is.
+	 * @param expression to read.
+	 */
+	public Read( int line, int column, Expression expression ) {
+		this.line = line;
+		this.column = column;
+		this.expression = expression;
+	}
 
-    @Override
-    public int getLine() {
-	return this.line;
-    }
+	public Expression getExpression() {
+		return this.expression;
+	}
 
-    @Override
-    public int getColumn() {
-	return this.column;
-    }
+	@Override
+	public int getLine() {
+		return this.line;
+	}
 
-    @Override
-    public String toString() {
-	return "input " + this.expression.toString();
-    }
+	@Override
+	public int getColumn() {
+		return this.column;
+	}
 
-    /* (non-Javadoc)
-     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
-     */
-    @Override
-    public <P, R> R accept(Visitor<P, R> visitor, P param) {
-	return visitor.visit(this, param);
-    }
+	@Override
+	public String toString() {
+		return "input " + this.expression.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+	 */
+	@Override
+	public <P, R> R accept( Visitor<P, R> visitor, P param ) {
+		return visitor.visit( this, param );
+	}
 
 }

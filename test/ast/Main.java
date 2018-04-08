@@ -1,6 +1,7 @@
 package ast;
 
 import parser.*;
+import visitor.impl.IdentificationVisitor;
 import visitor.impl.TypeCheckingVisitor;
 
 import org.antlr.v4.runtime.*;
@@ -27,6 +28,7 @@ public class Main {
 	PmmParser parser = new PmmParser(tokens);
 	Program ast = parser.program().ast;
 	
+	ast.accept( new IdentificationVisitor(), null );
 	ast.accept(new TypeCheckingVisitor(),null);
 
 	// * Check errors

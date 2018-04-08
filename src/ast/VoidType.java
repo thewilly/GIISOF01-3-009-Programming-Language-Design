@@ -2,7 +2,7 @@ package ast;
 
 import visitor.Visitor;
 
-public class VoidType implements Type {
+public class VoidType extends AbstractType {
 
     private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 

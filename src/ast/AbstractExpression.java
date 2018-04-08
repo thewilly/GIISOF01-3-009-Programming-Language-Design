@@ -12,27 +12,40 @@ package ast;
 /**
  * Instance of AbstractExpression.java
  * 
- * @author 
- * @version 
+ * @author
+ * @version
  */
 public abstract class AbstractExpression implements Expression {
-    
-    private boolean lValue = false;
 
-    /* (non-Javadoc)
-     * @see ast.Expression#getLValue()
-     */
-    @Override
-    public boolean getLValue() {
-	return this.lValue;
-    }
+	private boolean lValue = false;
+	private Type type;
 
-    /* (non-Javadoc)
-     * @see ast.Expression#setLValue(boolean)
-     */
-    @Override
-    public void setLValue(boolean lValue) {
-	this.lValue = lValue;
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see ast.Expression#getLValue()
+	 */
+	@Override
+	public boolean getLValue() {
+		return this.lValue;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ast.Expression#setLValue(boolean)
+	 */
+	@Override
+	public void setLValue( boolean lValue ) {
+		this.lValue = lValue;
+	}
+
+	@Override
+	public Type getType() {
+		return type;
+	}
+
+	@Override
+	public void setType( Type type ) {
+		this.type = type;
+	}
 
 }
