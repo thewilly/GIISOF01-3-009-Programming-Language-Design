@@ -80,7 +80,11 @@ public class ArrayType extends AbstractType {
 		System.out.println( type.getClass().toString() );
 
 		return null;
-
+	}
+	
+	@Override
+	public int getNumberOfBytes() {
+		return arrayType.getNumberOfBytes() * offset;
 	}
 
 }

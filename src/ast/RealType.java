@@ -6,6 +6,8 @@ import visitor.Visitor;
 public class RealType extends AbstractType {
 
 	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	
+	private static final int NUMBER_OF_BYTES = 4;
 
 	private static RealType instance = new RealType();
 
@@ -109,6 +111,11 @@ public class RealType extends AbstractType {
 		}
 
 		return null;
+	}
+	
+	@Override
+	public int getNumberOfBytes() {
+		return NUMBER_OF_BYTES;
 	}
 
 }

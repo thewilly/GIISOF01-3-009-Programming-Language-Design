@@ -4,6 +4,7 @@ import java.util.List;
 
 
 public interface Type extends ASTNode {
+	
 	boolean isLogical();
 
 	Type arithmetic(Type type);
@@ -25,4 +26,6 @@ public interface Type extends ASTNode {
 	Type promotesTo(Type type);
 
 	Type parentesis(List<Type> types);
+	
+	int getNumberOfBytes();
 }

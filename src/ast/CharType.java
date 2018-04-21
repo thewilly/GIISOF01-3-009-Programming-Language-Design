@@ -6,6 +6,8 @@ import visitor.Visitor;
 public class CharType extends AbstractType {
 
 	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	
+	private static final int NUMBER_OF_BYTES = 1;
 
 	private static CharType instance = new CharType();
 
@@ -108,6 +110,11 @@ public class CharType extends AbstractType {
 		}
 
 		return null;
+	}
+	
+	@Override
+	public int getNumberOfBytes() {
+		return NUMBER_OF_BYTES;
 	}
 
 }

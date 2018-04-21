@@ -91,4 +91,9 @@ public class FunctionType extends AbstractType {
 		}
 		return null;
 	}
+	
+	@Override
+	public int getNumberOfBytes() {
+		return this.returnType.getNumberOfBytes();
+	}
 }
