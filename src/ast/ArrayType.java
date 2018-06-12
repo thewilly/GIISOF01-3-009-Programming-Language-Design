@@ -87,4 +87,12 @@ public class ArrayType extends AbstractType {
 		return arrayType.getNumberOfBytes() * offset;
 	}
 
+	/* (non-Javadoc)
+	 * @see ast.Type#subfix()
+	 */
+	@Override
+	public String subfix() {
+		return this.arrayType.subfix();
+	}
+
 }

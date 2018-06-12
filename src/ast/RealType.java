@@ -118,4 +118,12 @@ public class RealType extends AbstractType {
 		return NUMBER_OF_BYTES;
 	}
 
+	/* (non-Javadoc)
+	 * @see ast.Type#subfix()
+	 */
+	@Override
+	public String subfix() {
+		return "F";
+	}
+
 }

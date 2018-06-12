@@ -93,5 +93,10 @@ public abstract class AbstractType implements Type {
 	public Type parentesis( List<Type> types ) {
 		return null;
 	}
+	
+	@Override
+	public String subfix() {
+		return "";
+	}
 
 }

@@ -96,4 +96,12 @@ public class FunctionType extends AbstractType {
 	public int getNumberOfBytes() {
 		return this.returnType.getNumberOfBytes();
 	}
+
+	/* (non-Javadoc)
+	 * @see ast.Type#subfix()
+	 */
+	@Override
+	public String subfix() {
+		return this.returnType.subfix();
+	}
 }

@@ -140,4 +140,12 @@ public class IntType extends AbstractType {
 	public int getNumberOfBytes() {
 		return NUMBER_OF_BYTES;
 	}
+
+	/* (non-Javadoc)
+	 * @see ast.Type#subfix()
+	 */
+	@Override
+	public String subfix() {
+		return "I";
+	}
 }

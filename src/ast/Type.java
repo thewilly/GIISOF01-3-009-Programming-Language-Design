@@ -28,4 +28,6 @@ public interface Type extends ASTNode {
 	Type parentesis(List<Type> types);
 	
 	int getNumberOfBytes();
+	
+	String subfix();
 }
