@@ -31,18 +31,39 @@ public class Main {
 		Program ast = parser.program().ast;
 
 		ast.accept( new IdentificationVisitor(), null );
-		ast.accept( new TypeCheckingVisitor(), null );
-		ast.accept( new OffsetVisitor(), null );
-		ast.accept( new ExecuteCodeGeneratorVisitor(args[0], args[1]), null );
 
 		// * Check errors
 		if (EH.getInstance().hasErrors()) {
+			
 			// * Show errors
 			EH.getInstance().showErrors( System.err );
+		
 		} else {
-			// * The AST is shown
-			IntrospectorModel model = new IntrospectorModel( "Program", ast );
-			new IntrospectorTree( "Introspector", model );
+			
+			ast.accept( new TypeCheckingVisitor(), null );
+			
+			if (EH.getInstance().hasErrors()) {
+				
+				EH.getInstance().showErrors( System.err );
+			
+			} else {
+				
+				ast.accept( new OffsetVisitor(), null );
+				
+				if (EH.getInstance().hasErrors()) {
+					
+					EH.getInstance().showErrors( System.err );
+				
+				} else {
+					
+					ast.accept( new ExecuteCodeGeneratorVisitor(args[0], args[1]), null );
+					
+					// * The AST is shown
+					IntrospectorModel model = new IntrospectorModel( "Program", ast );
+					new IntrospectorTree( "Introspector", model );
+				}
+			}
+			
 		}
 	}
 }

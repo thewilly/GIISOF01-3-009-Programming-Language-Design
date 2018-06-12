@@ -24,12 +24,14 @@ import visitor.AbstractVisitor;
  * @version
  */
 public class IdentificationVisitor extends AbstractVisitor<Object, Object> {
+	
+	SymbolTable st = new SymbolTable();
 
 	@Override
 	public Object visit( Variable variable, Object param ) {
-
+		
 		variable.setDefinition(
-				SymbolTable.getInstance().find( variable.getName() ) );
+				st.find( variable.getName() ) );
 		if (variable.getDefinition() == null)
 			variable.setDefinition( new VarDefinition( variable.getLine(), variable.getColumn(),
 					variable.getName(), new ErrorType( variable,
@@ -41,16 +43,16 @@ public class IdentificationVisitor extends AbstractVisitor<Object, Object> {
 	@Override
 	public Object visit( FuncDefinition funcDefinition, Object param ) {
 
-		if (!SymbolTable.getInstance().insert( funcDefinition ))
+		if (!st.insert( funcDefinition ))
 			new ErrorType( funcDefinition,
 					"Duplicate function definition for: " + funcDefinition.getName() );
 
-		SymbolTable.getInstance().set();
+		st.set();
 		funcDefinition.getType().accept( this, param );
 		for (Statement statement : funcDefinition.getStatements()) {
 			statement.accept( this, param );
 		}
-		SymbolTable.getInstance().reset();
+		st.reset();
 
 		return null;
 	}
@@ -58,10 +60,10 @@ public class IdentificationVisitor extends AbstractVisitor<Object, Object> {
 	@Override
 	public Object visit( VarDefinition varDefinition, Object param ) {
 
-		if (!SymbolTable.getInstance().insert( varDefinition ))
+		if (!st.insert( varDefinition ))
 			new ErrorType( varDefinition,
 					"Duplicate variable definition for: " + varDefinition.getName() );
-
+		varDefinition.getType().accept( this, param );
 		return null;
 	}
 

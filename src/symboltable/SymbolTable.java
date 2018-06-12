@@ -9,11 +9,12 @@
  */
 package symboltable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import ast.Definition;
-import ast.VarDefinition;
 
 /**
  * Instance of SymbolTable.java
@@ -23,56 +24,44 @@ import ast.VarDefinition;
  */
 public class SymbolTable {
 
-	private LinkedList<HashMap<String, Definition>> tables;
+	private List<Map<String, Definition>> table;
 	private int scope = 0;
 
-	private static SymbolTable instance;
-
-	public static SymbolTable getInstance() {
-		if (instance == null)
-			instance = new SymbolTable();
-		return instance;
-	}
-
 	public SymbolTable() {
-		tables = new LinkedList<HashMap<String, Definition>>();
-		tables.add( new HashMap<String, Definition>() );
+		table = new ArrayList<Map<String, Definition>>();
+		table.add( new HashMap<String, Definition>() );
 	}
 
-	public boolean insert( Definition definition ) {
-
-		if (tables.getLast().containsKey( definition.getName() ))
-			return false;
-
-		if (definition instanceof VarDefinition)
-			( (VarDefinition) definition ).setScope( this.scope );
-
-		tables.getLast().put( definition.getName(), definition );
-		return true;
+	public void set() {
+		table.add(new HashMap<String, Definition>());
+		this.scope++;
 	}
 
-	public Definition find( String name ) {
-		for (HashMap<String, Definition> table : tables) {
-			if (table.containsKey( name ))
-				return table.get( name );
+	public void reset() {
+		table.remove(this.scope);
+		this.scope--;
+	}
+
+	public boolean insert(Definition definition) {
+		if (definition != null && findInCurrentScope(definition.getName()) == null) {
+			this.table.get(this.scope).put(definition.getName(), definition);
+			definition.setScope(this.scope);
+			return true;
+		}
+		return false;
+	}
+
+	public Definition find(String id) {
+		for (int i = this.scope; i >= 0; i--) {
+			if (this.table.get(i).containsKey(id)) {
+				return this.table.get(i).get(id);
+			}
 		}
 		return null;
 	}
 
-	public void set() {
-		this.scope++;
-		this.tables.addLast( new HashMap<String, Definition>() );
-	}
-
-	public void reset() {
-		this.scope--;
-		this.tables.removeLast();
-	}
-
-	public Definition findInCurrentScope( String name ) {
-		if (tables.getLast().containsKey( name ))
-			return tables.getLast().get( name );
-		return null;
+	public Definition findInCurrentScope(String id) {
+		return this.table.get(this.scope).get(id);
 	}
 
 }

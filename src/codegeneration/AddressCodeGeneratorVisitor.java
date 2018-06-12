@@ -35,8 +35,8 @@ public class AddressCodeGeneratorVisitor extends CodeGeneratorVisitor {
 	}
 
 	@Override
-	public Object visit( FieldAccess fieldAccess, Object o ) {
-		fieldAccess.getExp().accept( this, o );
+	public Object visit( FieldAccess fieldAccess, Object param ) {
+		fieldAccess.getExp().accept( this, param );
 		generator.push(
 				fieldAccess.getExp().getType().get(
 						fieldAccess.getName() ).getOffset() );

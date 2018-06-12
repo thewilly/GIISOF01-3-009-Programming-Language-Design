@@ -121,7 +121,15 @@ public class IntType extends AbstractType {
 			return type;
 		}
 
+		if (type instanceof CharType) {
+			return this;
+		}
+
 		if (type instanceof IntType) {
+			return this;
+		}
+
+		if (type instanceof RealType) {
 			return this;
 		}
 

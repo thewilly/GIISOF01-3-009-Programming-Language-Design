@@ -179,15 +179,17 @@ public class TypeCheckingVisitor extends AbstractVisitor<Object, Object> {
 	}
 
 	@Override
-	public Object visit( Invocation invocation, Object o ) {
-		invocation.getFuncion().accept( this, o );
+	public Object visit( Invocation invocation, Object param ) {
+		invocation.getFuncion().accept( this, param );
 
 		List<Type> types = new ArrayList<Type>();
 		if (invocation.getArguments() != null) {
 
-			for (Expression e : invocation.getArguments()) {
-				e.accept( this, o );
-				types.add( e.getType() );
+			for (Expression expression : invocation.getArguments()) {
+				expression.accept( this, param );
+				types.add( expression.getType() );
+				System.out.println( "Expression " + expression );
+				System.out.println( "Parameter type adding: " + expression.getType() );
 			}
 		}
 

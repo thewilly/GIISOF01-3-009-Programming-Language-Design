@@ -49,9 +49,9 @@ public class RecordType extends AbstractType {
 		StringBuilder recordType = new StringBuilder();
 		recordType.append( "struct {" );
 		for (RecordField r : this.getFields()) {
-			recordType.append( "\n \t" + r.toString() );
+			recordType.append( " \t" + r.toString() );
 		}
-		recordType.append( "\n }" );
+		recordType.append( " }" );
 		return recordType.toString();
 	}
 
@@ -78,7 +78,7 @@ public class RecordType extends AbstractType {
 	public int getNumberOfBytes() {
 		int numberOfBytes = 0;
 		for (RecordField field : this.getFields()) {
-			numberOfBytes = +field.getType().getNumberOfBytes();
+			numberOfBytes += field.getType().getNumberOfBytes();
 		}
 		return numberOfBytes;
 	}

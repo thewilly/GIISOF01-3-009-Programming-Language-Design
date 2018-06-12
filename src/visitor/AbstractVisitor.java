@@ -68,10 +68,13 @@ public class AbstractVisitor<P, R> implements Visitor<P, R> {
 	 */
 	@Override
 	public R visit( Cast cast, P param ) {
-		if (cast.getCastType() != null)
-			cast.getCastType().accept( this, param );
+		
 		if (cast.getExp() != null)
 			cast.getExp().accept( this, param );
+		
+		if (cast.getCastType() != null)
+			cast.getCastType().accept( this, param );
+		
 		return null;
 	}
 

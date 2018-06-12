@@ -1,158 +1,299 @@
-#source "test.input.txt"
+#source "big.input.txt"
 
-	' * int integer (offset 0)
-	' * char character (offset 2)
-	' * real real (offset 3)
-	' * int MATRIXSIZE (offset 7)
-	' * [10][10]int matrix (offset 9)
-	' * struct {
- 	day:int
- 	mounth:int
- 	year:int
- } date (offset 209)
+	' * struct { 	integer:int 	character:char } pair (offset 0)
+	' * [2]struct { 	employees:[2]struct { 	age:int } } acme (offset 3)
+	' * [8][3]int fibonacci (offset 11)
 
  ' Invocation to the main function
 	CALL main
 	HALT
- setValue:
+ p:
 	' * Parameters
-	' * int row (offset 8)
-	' * int columnn (offset 6)
-	' * int value (offset 4)
 
 	' * Local variables
 
 	enter 0
-
-#line	16
-
-	PUSH BP
-	PUSHI 8
-	ADDI
-	LOADI
-	PUSHI 0
-	GEI
-	PUSH BP
-	PUSHI 8
-	ADDI
-	LOADI
-	PUSHA 7
-	LOADI
-	LTI
-	AND
-	PUSH BP
-	PUSHI 6
-	ADDI
-	LOADI
-	PUSHI 0
-	GEI
-	AND
-	PUSH BP
-	PUSHI 6
-	ADDI
-	LOADI
-	PUSHA 7
-	LOADI
-	LTI
-	AND
-	JZ Label0
-
-#line	17
-
-	PUSHA 9
-	PUSH BP
-	PUSHI 8
-	ADDI
-	LOADI
-	PUSHI 20
-	MULI
-	ADDI
-	PUSHA 0
-	LOAD 
-	PUSHI 0
-	MULI
-	ADDI
-	PUSH BP
-	PUSHI 4
-	ADDI
-	LOADI
-	STORE 
-	JMP Label1
-Label0:
-Label1:
-	ret 0,0,6
- getValue:
+	ret 0,0,0
+ f:
 	' * Parameters
-	' * int row (offset 6)
-	' * int columnn (offset 4)
+	' * real r (offset 6)
+	' * int e (offset 4)
 
 	' * Local variables
+	' * real real (offset -4)
+	' * char c (offset -5)
+	' * int result (offset -7)
 
-	enter 0
+	enter 7
+
+#line	20
+
+	PUSH BP
+	PUSHI -4
+	ADDI
+	PUSH BP
+	PUSHI 6
+	ADDI
+	LOADF
+	PUSHF 10.0
+	MULF
+	STOREF
 
 #line	21
 
 	PUSH BP
-	PUSHI 6
+	PUSHI -5
 	ADDI
-	LOADI
-	PUSHI 0
-	LTI
-	PUSH BP
-	PUSHI 6
-	ADDI
-	LOADI
-	PUSHA 7
-	LOADI
-	GEI
-	OR
-	PUSH BP
-	PUSHI 4
-	ADDI
-	LOADI
-	PUSHI 0
-	LTI
-	PUSH BP
-	PUSHI 4
-	ADDI
-	LOADI
-	PUSHA 7
-	LOADI
-	GEI
-	AND
-	OR
-	JZ Label2
+	PUSHB 48
+	STOREB
 
 #line	22
 
-	PUSHI 1
-	PUSHI -1
-	MULI
-	ret 2,0,4
-	JMP Label3
-Label2:
-
-#line	25
-
-	PUSHA 9
 	PUSH BP
-	PUSHI 6
+	PUSHI 4
 	ADDI
 	LOADI
-	PUSHI 20
-	MULI
+	PUSHI 256
+	LTI
+	JZ Label0
+
+#line	23
+
+	PUSH BP
+	PUSHI -5
 	ADDI
-	PUSHA 0
-	LOAD 
-	PUSHI 0
-	MULI
+	PUSH BP
+	PUSHI 4
 	ADDI
-	LOAD 
-	ret 2,0,4
-Label3:
- fill:
+	LOADI
+	I2B
+	STOREB
+
+#line	24
+
+	PUSH BP
+	PUSHI -7
+	ADDI
+	PUSH BP
+	PUSHI -5
+	ADDI
+	LOADB
+	B2I
+	STOREI
+	JMP Label1
+Label0:
+
+#line	27
+
+	PUSH BP
+	PUSHI -7
+	ADDI
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADF
+	F2I
+	STOREI
+Label1:
+
+#line	28
+
+	PUSH BP
+	PUSHI -7
+	ADDI
+	LOADI
+	ret 2,7,6
+ initialize:
 	' * Parameters
-	' * int value (offset 4)
+
+	' * Local variables
+	' * int i (offset -2)
+
+	enter 2
+
+#line	33
+
+	PUSHA 11
+	PUSHI 0
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 0
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHI 0
+	STOREI
+
+#line	34
+
+	PUSHA 11
+	PUSHI 0
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 1
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHI 1
+	STOREI
+
+#line	35
+
+	PUSHA 11
+	PUSHI 0
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 2
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHI 1
+	STOREI
+
+#line	36
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSHI 1
+	STOREI
+
+#line	37
+
+Label2:
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 8
+	LTI
+	JZ Label3
+
+#line	38
+
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 0
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 1
+	SUBI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 1
+	PUSHI 2
+	MULI
+	ADDI
+	LOADI
+	STOREI
+
+#line	39
+
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 1
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 1
+	SUBI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 2
+	PUSHI 2
+	MULI
+	ADDI
+	LOADI
+	STOREI
+
+#line	40
+
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 2
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 0
+	PUSHI 2
+	MULI
+	ADDI
+	LOADI
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 1
+	PUSHI 2
+	MULI
+	ADDI
+	LOADI
+	ADDI
+	STOREI
+
+#line	41
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 1
+	ADDI
+	STOREI
+	JMP Label2
+Label3:
+	ret 0,2,0
+ main:
+	' * Parameters
 
 	' * Local variables
 	' * int i (offset -2)
@@ -160,7 +301,11 @@ Label3:
 
 	enter 4
 
-#line	30
+#line	49
+
+	CALL p
+
+#line	50
 
 	PUSH BP
 	PUSHI -2
@@ -168,70 +313,160 @@ Label3:
 	PUSHI 0
 	STOREI
 
-#line	31
+#line	51
+
+	PUSHA 0
+	PUSHI 2
+	ADDI
+	PUSHB 48
+	STOREB
+
+#line	52
+
+	PUSHA 0
+	PUSHI 0
+	ADDI
+	PUSHB 48
+	B2I
+	STOREI
+
+#line	55
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	I2F
+	PUSHA 0
+	PUSHI 2
+	ADDI
+	LOADB
+	B2I
+	CALL f
+	OUTI
+
+#line	55
+
+	PUSHB 10
+	OUTB
+
+#line	56
+
+	PUSHF 1.3
+	PUSHI 2
+	CALL f
+	POPI
+
+#line	58
+
+	CALL initialize
+
+#line	59
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSHI 0
+	STOREI
+
+#line	60
 
 Label4:
 	PUSH BP
 	PUSHI -2
 	ADDI
 	LOADI
-	PUSHA 7
-	LOADI
+	PUSHI 8
 	LTI
 	JZ Label5
 
-#line	32
+#line	62
 
-	PUSH BP
-	PUSHI -4
-	ADDI
-	PUSHI 0
-	STOREI
+	PUSHB 40
+	OUTB
 
-#line	33
-
-Label6:
-	PUSH BP
-	PUSHI -4
-	ADDI
-	LOADI
-	PUSHA 7
-	LOADI
-	LTI
-	JZ Label7
-
-#line	34
+#line	62
 
 	PUSH BP
 	PUSHI -2
 	ADDI
 	LOADI
-	PUSH BP
-	PUSHI -4
-	ADDI
-	LOADI
-	PUSH BP
-	PUSHI 4
-	ADDI
-	LOADI
-	CALL setValue
-
-#line	35
-
-	PUSH BP
-	PUSHI -4
-	ADDI
-	PUSH BP
-	PUSHI -4
-	ADDI
-	LOADI
 	PUSHI 1
 	ADDI
-	STOREI
-	JMP Label6
-Label7:
+	OUTI
 
-#line	37
+#line	62
+
+	PUSHB 41
+	OUTB
+
+#line	62
+
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 0
+	PUSHI 2
+	MULI
+	ADDI
+	LOADI
+	OUTI
+
+#line	62
+
+	PUSHB 43
+	OUTB
+
+#line	62
+
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 1
+	PUSHI 2
+	MULI
+	ADDI
+	LOADI
+	OUTI
+
+#line	62
+
+	PUSHB 61
+	OUTB
+
+#line	62
+
+	PUSHA 11
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 6
+	MULI
+	ADDI
+	PUSHI 2
+	PUSHI 2
+	MULI
+	ADDI
+	LOADI
+	OUTI
+
+#line	62
+
+	PUSHB 10
+	OUTB
+
+#line	65
 
 	PUSH BP
 	PUSHI -2
@@ -245,17 +480,49 @@ Label7:
 	STOREI
 	JMP Label4
 Label5:
-	ret 0,4,2
- show:
-	' * Parameters
 
-	' * Local variables
-	' * int i (offset -2)
-	' * int j (offset -4)
+#line	68
 
-	enter 4
+	PUSHA 3
+	PUSHI 1
+	PUSHI 4
+	MULI
+	ADDI
+	PUSHI 0
+	ADDI
+	PUSHI 1
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHI 0
+	ADDI
+	PUSHI 56
+	STOREI
 
-#line	42
+#line	70
+
+	PUSHA 3
+	PUSHI 1
+	PUSHI 4
+	MULI
+	ADDI
+	PUSHI 0
+	ADDI
+	PUSHI 1
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHI 0
+	ADDI
+	LOADI
+	OUTI
+
+#line	70
+
+	PUSHB 10
+	OUTB
+
+#line	71
 
 	PUSH BP
 	PUSHI -2
@@ -263,124 +530,75 @@ Label5:
 	PUSHI 0
 	STOREI
 
-#line	43
+#line	72
 
-	PUSHB 91
-	OUTB
+Label6:
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 2
+	LTI
+	JZ Label7
 
-#line	43
+#line	73
 
-	PUSHB 10
-	OUTB
+	PUSH BP
+	PUSHI -4
+	ADDI
+	PUSHI 0
+	STOREI
 
-#line	44
+#line	74
 
 Label8:
 	PUSH BP
-	PUSHI -2
+	PUSHI -4
 	ADDI
 	LOADI
-	PUSHA 7
-	LOADI
+	PUSHI 2
 	LTI
 	JZ Label9
 
-#line	45
+#line	75
 
+	PUSHA 3
 	PUSH BP
-	PUSHI -4
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 4
+	MULI
 	ADDI
 	PUSHI 0
+	ADDI
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHI 0
+	ADDI
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	ADDI
 	STOREI
 
-#line	46
-
-	PUSHB 9
-	OUTB
-
-#line	46
-
-	PUSHB 91
-	OUTB
-
-#line	47
-
-Label10:
-	PUSH BP
-	PUSHI -4
-	ADDI
-	LOADI
-	PUSHA 7
-	LOADI
-	LTI
-	JZ Label11
-
-#line	48
-
-	PUSH BP
-	PUSHI -2
-	ADDI
-	LOADI
-	PUSH BP
-	PUSHI -4
-	ADDI
-	LOADI
-	CALL getValue
-	OUTI
-
-#line	49
-
-	PUSH BP
-	PUSHI -4
-	ADDI
-	LOADI
-	PUSHA 7
-	LOADI
-	PUSHI 1
-	SUBI
-	NEI
-	JZ Label12
-
-#line	50
-
-	PUSHB 44
-	OUTB
-	JMP Label13
-Label12:
-Label13:
-
-#line	52
+#line	76
 
 	PUSH BP
 	PUSHI -4
 	ADDI
 	PUSH BP
 	PUSHI -4
-	ADDI
-	LOADI
-	PUSHI 1
-	ADDI
-	STOREI
-	JMP Label10
-Label11:
-
-#line	54
-
-	PUSHB 93
-	OUTB
-
-#line	54
-
-	PUSHB 10
-	OUTB
-
-#line	55
-
-	PUSH BP
-	PUSHI -2
-	ADDI
-	PUSH BP
-	PUSHI -2
 	ADDI
 	LOADI
 	PUSHI 1
@@ -389,148 +607,115 @@ Label11:
 	JMP Label8
 Label9:
 
-#line	57
+#line	78
 
-	PUSHB 93
-	OUTB
-	ret 0,4,0
- main:
-	' * Parameters
-
-	' * Local variables
-	' * [1][2][3]char characters (offset -6)
-
-	enter 6
-
-#line	69
-
-	PUSHA 7
-	PUSHI 10
-	STOREI
-
-#line	70
-
-	PUSHI 1
-	CALL fill
-
-#line	71
-
-	PUSHI 5
-	PUSHI 5
-	PUSHI 5
-	CALL setValue
-
-#line	72
-
-	PUSHA 0
-	PUSHI 5
-	PUSHI 5
-	CALL getValue
-	STOREI
-
-#line	73
-
-	PUSHA 0
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSH BP
+	PUSHI -2
+	ADDI
 	LOADI
-	PUSHI 5
-	EQI
-	JZ Label14
-
-#line	74
-
-	PUSHB 79
-	OUTB
-
-#line	74
-
-	PUSHB 107
-	OUTB
-
-#line	74
-
-	PUSHB 10
-	OUTB
-	JMP Label15
-Label14:
-
-#line	77
-
-	PUSHB 69
-	OUTB
-
-#line	77
-
-	PUSHB 114
-	OUTB
-
-#line	77
-
-	PUSHB 114
-	OUTB
-
-#line	77
-
-	PUSHB 111
-	OUTB
-
-#line	77
-
-	PUSHB 114
-	OUTB
-
-#line	77
-
-	PUSHB 10
-	OUTB
-Label15:
-
-#line	79
-
-	CALL show
+	PUSHI 1
+	ADDI
+	STOREI
+	JMP Label6
+Label7:
 
 #line	81
 
-	PUSHA 209
-	PUSHI 0
+	PUSH BP
+	PUSHI -2
 	ADDI
-	PUSHI 9
+	PUSHI 0
 	STOREI
 
 #line	82
 
-	PUSHA 209
-	PUSHI 0
+Label10:
+	PUSH BP
+	PUSHI -2
 	ADDI
-	PUSHI 3
-	STOREI
+	LOADI
+	PUSHI 2
+	LTI
+	JZ Label11
 
 #line	83
 
-	PUSHA 209
-	PUSHI 0
+	PUSH BP
+	PUSHI -4
 	ADDI
-	PUSHI 2016
+	PUSHI 0
 	STOREI
 
-#line	85
+#line	84
 
-	PUSHA 2
-	PUSHA 209
-	PUSHI 0
+Label12:
+	PUSH BP
+	PUSHI -4
 	ADDI
 	LOADI
-	I2B
-	STOREB
+	PUSHI 2
+	LTI
+	JZ Label13
 
 #line	86
 
 	PUSHA 3
-	PUSHF 4.5
-	PUSHF 4.0
-	PUSHF 3000.0
-	MULF
-	ADDF
-	PUSHF 0.0054
-	SUBF
-	STOREF
-	ret 0,6,0
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 4
+	MULI
+	ADDI
+	PUSHI 0
+	ADDI
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	PUSHI 2
+	MULI
+	ADDI
+	PUSHI 0
+	ADDI
+	LOADI
+	OUTI
+
+#line	86
+
+	PUSHB 32
+	OUTB
+
+#line	87
+
+	PUSH BP
+	PUSHI -4
+	ADDI
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	PUSHI 1
+	ADDI
+	STOREI
+	JMP Label12
+Label13:
+
+#line	89
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 1
+	ADDI
+	STOREI
+	JMP Label10
+Label11:
+	ret 0,4,0

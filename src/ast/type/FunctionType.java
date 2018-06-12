@@ -85,6 +85,9 @@ public class FunctionType extends AbstractType {
 	public Type parentesis( List<Type> types ) {
 		if (types.size() == parameters.size()) {
 			for (int i = 0; i < types.size(); i++) {
+				System.out.println( "Parameters value: " + parameters );
+				System.out.println( "Types value: " + types );
+				System.out.println( "Parameters " + i + " type: " + parameters.get( i ).getType() );
 				if (types.get( i ).promotesTo( parameters.get( i ).getType() ) == null) {
 					return null;
 				}
