@@ -18,7 +18,11 @@ program returns [Program ast]
 
 // Built-in types are int, double and char.
 build_in_type returns [Type ast]
- : 'int' {$ast = IntType.getInstance();} | 'double' {$ast = RealType.getInstance();} | 'char' {$ast = CharType.getInstance();} | ('['size=INT_CONSTANT']') arr_type=build_in_type {$ast = new ArrayType($start.getLine(), $start.getCharPositionInLine()+1, LexerHelper.lexemeToInt($size.text), $arr_type.ast);}
+ : 'int' {$ast = IntType.getInstance();}
+ | 'double' {$ast = RealType.getInstance();}
+ | 'char' {$ast = CharType.getInstance();}
+ | {List<RecordField> fields = new ArrayList<RecordField>();} STRUCT '{' (fields{fields.addAll($fields.ast);}) '}' {$ast = new RecordType($STRUCT.line, $STRUCT.pos+1, fields);}
+ | ('['size=INT_CONSTANT']') arr_type=build_in_type {$ast = new ArrayType($start.getLine(), $start.getCharPositionInLine()+1, LexerHelper.lexemeToInt($size.text), $arr_type.ast);}
  ;
 
 
@@ -250,6 +254,10 @@ REAL_CONSTANT
  | INT_CONSTANT '.'
  | INT_CONSTANT EXPONENT
  | INT_CONSTANT '.' DIGIT* EXPONENT
+ ;
+
+STRUCT
+ : 'struct'
  ;
 
 CHAR_CONSTANT

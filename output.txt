@@ -1,90 +1,536 @@
-#source "input.txt"
+#source "test.input.txt"
 
-	' * int i (offset 0)
-	' * int n (offset 2)
-	' * char c (offset 4)
+	' * int integer (offset 0)
+	' * char character (offset 2)
+	' * real real (offset 3)
+	' * int MATRIXSIZE (offset 7)
+	' * [10][10]int matrix (offset 9)
 	' * struct {
- 	intField:int
- 	realField:real
- } record (offset 5)
+ 	day:int
+ 	mounth:int
+ 	year:int
+ } date (offset 209)
 
  ' Invocation to the main function
 	CALL main
 	HALT
- f:
+ setValue:
 	' * Parameters
-	' * int a (offset 8)
-	' * real c (offset 4)
+	' * int row (offset 8)
+	' * int columnn (offset 6)
+	' * int value (offset 4)
 
 	' * Local variables
-	' * real real (offset -4)
 
-	enter 4
+	enter 0
 
-#line	11
+#line	16
 
-	PUSH BP
-	PUSHI -4
-	ADDI
-	PUSHA 4
-	LOADB
-	B2I
-	I2F
-	STOREF
-
-#line	12
-
-	PUSHA 0
 	PUSH BP
 	PUSHI 8
 	ADDI
 	LOADI
+	PUSHI 0
+	GEI
+	PUSH BP
+	PUSHI 8
+	ADDI
+	LOADI
+	PUSHA 7
+	LOADI
+	LTI
+	AND
+	PUSH BP
+	PUSHI 6
+	ADDI
+	LOADI
+	PUSHI 0
+	GEI
+	AND
+	PUSH BP
+	PUSHI 6
+	ADDI
+	LOADI
+	PUSHA 7
+	LOADI
+	LTI
+	AND
+	JZ Label0
+
+#line	17
+
+	PUSHA 9
+	PUSH BP
+	PUSHI 8
+	ADDI
+	LOADI
+	PUSHI 20
+	MULI
+	ADDI
+	PUSHA 0
+	LOAD 
+	PUSHI 0
+	MULI
+	ADDI
+	PUSH BP
+	PUSHI 4
+	ADDI
+	LOADI
+	STORE 
+	JMP Label1
+Label0:
+Label1:
+	ret 0,0,6
+ getValue:
+	' * Parameters
+	' * int row (offset 6)
+	' * int columnn (offset 4)
+
+	' * Local variables
+
+	enter 0
+
+#line	21
+
+	PUSH BP
+	PUSHI 6
+	ADDI
+	LOADI
+	PUSHI 0
+	LTI
+	PUSH BP
+	PUSHI 6
+	ADDI
+	LOADI
+	PUSHA 7
+	LOADI
+	GEI
+	OR
+	PUSH BP
+	PUSHI 4
+	ADDI
+	LOADI
+	PUSHI 0
+	LTI
+	PUSH BP
+	PUSHI 4
+	ADDI
+	LOADI
+	PUSHA 7
+	LOADI
+	GEI
+	AND
+	OR
+	JZ Label2
+
+#line	22
+
+	PUSHI 1
+	PUSHI -1
+	MULI
+	ret 2,0,4
+	JMP Label3
+Label2:
+
+#line	25
+
+	PUSHA 9
+	PUSH BP
+	PUSHI 6
+	ADDI
+	LOADI
+	PUSHI 20
+	MULI
+	ADDI
+	PUSHA 0
+	LOAD 
+	PUSHI 0
+	MULI
+	ADDI
+	LOAD 
+	ret 2,0,4
+Label3:
+ fill:
+	' * Parameters
+	' * int value (offset 4)
+
+	' * Local variables
+	' * int i (offset -2)
+	' * int j (offset -4)
+
+	enter 4
+
+#line	30
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSHI 0
 	STOREI
 
-#line	13
+#line	31
 
-	PUSHA 2
+Label4:
+	PUSH BP
+	PUSHI -2
+	ADDI
 	LOADI
-	ret 2,4,6
- main:
+	PUSHA 7
+	LOADI
+	LTI
+	JZ Label5
+
+#line	32
+
+	PUSH BP
+	PUSHI -4
+	ADDI
+	PUSHI 0
+	STOREI
+
+#line	33
+
+Label6:
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	PUSHA 7
+	LOADI
+	LTI
+	JZ Label7
+
+#line	34
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	PUSH BP
+	PUSHI 4
+	ADDI
+	LOADI
+	CALL setValue
+
+#line	35
+
+	PUSH BP
+	PUSHI -4
+	ADDI
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	PUSHI 1
+	ADDI
+	STOREI
+	JMP Label6
+Label7:
+
+#line	37
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 1
+	ADDI
+	STOREI
+	JMP Label4
+Label5:
+	ret 0,4,2
+ show:
 	' * Parameters
 
 	' * Local variables
 	' * int i (offset -2)
-	' * real r (offset -6)
+	' * int j (offset -4)
+
+	enter 4
+
+#line	42
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSHI 0
+	STOREI
+
+#line	43
+
+	PUSHB 91
+	OUTB
+
+#line	43
+
+	PUSHB 10
+	OUTB
+
+#line	44
+
+Label8:
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHA 7
+	LOADI
+	LTI
+	JZ Label9
+
+#line	45
+
+	PUSH BP
+	PUSHI -4
+	ADDI
+	PUSHI 0
+	STOREI
+
+#line	46
+
+	PUSHB 9
+	OUTB
+
+#line	46
+
+	PUSHB 91
+	OUTB
+
+#line	47
+
+Label10:
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	PUSHA 7
+	LOADI
+	LTI
+	JZ Label11
+
+#line	48
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	CALL getValue
+	OUTI
+
+#line	49
+
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	PUSHA 7
+	LOADI
+	PUSHI 1
+	SUBI
+	NEI
+	JZ Label12
+
+#line	50
+
+	PUSHB 44
+	OUTB
+	JMP Label13
+Label12:
+Label13:
+
+#line	52
+
+	PUSH BP
+	PUSHI -4
+	ADDI
+	PUSH BP
+	PUSHI -4
+	ADDI
+	LOADI
+	PUSHI 1
+	ADDI
+	STOREI
+	JMP Label10
+Label11:
+
+#line	54
+
+	PUSHB 93
+	OUTB
+
+#line	54
+
+	PUSHB 10
+	OUTB
+
+#line	55
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 1
+	ADDI
+	STOREI
+	JMP Label8
+Label9:
+
+#line	57
+
+	PUSHB 93
+	OUTB
+	ret 0,4,0
+ main:
+	' * Parameters
+
+	' * Local variables
+	' * [1][2][3]char characters (offset -6)
 
 	enter 6
 
-#line	19
+#line	69
+
+	PUSHA 7
+	PUSHI 10
+	STOREI
+
+#line	70
+
+	PUSHI 1
+	CALL fill
+
+#line	71
+
+	PUSHI 5
+	PUSHI 5
+	PUSHI 5
+	CALL setValue
+
+#line	72
+
+	PUSHA 0
+	PUSHI 5
+	PUSHI 5
+	CALL getValue
+	STOREI
+
+#line	73
 
 	PUSHA 0
 	LOADI
-	OUTI
+	PUSHI 5
+	EQI
+	JZ Label14
 
-#line	19
+#line	74
+
+	PUSHB 79
+	OUTB
+
+#line	74
+
+	PUSHB 107
+	OUTB
+
+#line	74
+
+	PUSHB 10
+	OUTB
+	JMP Label15
+Label14:
+
+#line	77
+
+	PUSHB 69
+	OUTB
+
+#line	77
+
+	PUSHB 114
+	OUTB
+
+#line	77
+
+	PUSHB 114
+	OUTB
+
+#line	77
+
+	PUSHB 111
+	OUTB
+
+#line	77
+
+	PUSHB 114
+	OUTB
+
+#line	77
+
+	PUSHB 10
+	OUTB
+Label15:
+
+#line	79
+
+	CALL show
+
+#line	81
+
+	PUSHA 209
+	PUSHI 0
+	ADDI
+	PUSHI 9
+	STOREI
+
+#line	82
+
+	PUSHA 209
+	PUSHI 0
+	ADDI
+	PUSHI 3
+	STOREI
+
+#line	83
+
+	PUSHA 209
+	PUSHI 0
+	ADDI
+	PUSHI 2016
+	STOREI
+
+#line	85
 
 	PUSHA 2
-	LOADI
-	PUSH BP
-	PUSHI -6
-	ADDI
-	LOADF
-	CALL f
-	OUTI
-
-#line	19
-
-	PUSHA 5
+	PUSHA 209
 	PUSHI 0
 	ADDI
 	LOADI
-	OUTI
+	I2B
+	STOREB
 
-#line	19
+#line	86
 
-	PUSHA 5
-	PUSHI 0
-	ADDI
-	LOADF
-	OUTF
+	PUSHA 3
+	PUSHF 4.5
+	PUSHF 4.0
+	PUSHF 3000.0
+	MULF
+	ADDF
+	PUSHF 0.0054
+	SUBF
+	STOREF
 	ret 0,6,0

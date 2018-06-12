@@ -4,7 +4,7 @@ public class TestRigTrace {
 
 	public static void main( String... args ) throws Exception {
 		org.antlr.v4.gui.TestRig
-				.main( new String[] { "parser.Pmm", "program", "-trace", "small-input.txt" } );
+				.main( new String[] { "parser.Pmm", "program", "-trace", "big.input.txt" } );
 	}
 
 }
