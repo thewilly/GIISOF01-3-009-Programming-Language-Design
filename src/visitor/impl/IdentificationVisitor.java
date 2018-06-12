@@ -13,7 +13,7 @@ import ast.FuncDefinition;
 import ast.Statement;
 import ast.VarDefinition;
 import ast.Variable;
-import errorhandler.ErrorType;
+import ast.type.ErrorType;
 import symboltable.SymbolTable;
 import visitor.AbstractVisitor;
 
@@ -31,8 +31,9 @@ public class IdentificationVisitor extends AbstractVisitor<Object, Object> {
 		variable.setDefinition(
 				SymbolTable.getInstance().find( variable.getName() ) );
 		if (variable.getDefinition() == null)
-			variable.setDefinition( new VarDefinition( variable.getLine(), variable.getColumn(), variable.getName(),  new ErrorType( variable,
-					"No variable definition found for: " + variable.getName() )) );
+			variable.setDefinition( new VarDefinition( variable.getLine(), variable.getColumn(),
+					variable.getName(), new ErrorType( variable,
+							"No variable definition found for: " + variable.getName() ) ) );
 
 		return null;
 	}

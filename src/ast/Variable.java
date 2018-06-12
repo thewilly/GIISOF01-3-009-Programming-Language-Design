@@ -35,7 +35,7 @@ public class Variable extends AbstractExpression {
 		this.column = column;
 		this.name = name;
 	}
-	
+
 	public String getName() {
 		return this.name;
 	}

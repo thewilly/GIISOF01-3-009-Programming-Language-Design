@@ -7,10 +7,12 @@
  * See /LICENSE for license information.
  * 
  */
-package ast;
+package ast.type;
 
 import java.util.List;
 
+import ast.ASTNode;
+import ast.RecordField;
 import visitor.Visitor;
 
 /**
@@ -93,10 +95,24 @@ public abstract class AbstractType implements Type {
 	public Type parentesis( List<Type> types ) {
 		return null;
 	}
-	
+
 	@Override
-	public String subfix() {
-		return "";
+	public char subfix() {
+		return ' ';
 	}
 
+	@Override
+	public Type superType(Type type) {
+		return null;
+	}
+	
+	@Override
+	public boolean isBuildInType() {
+		return false;
+	}
+	
+	@Override
+	public RecordField get(String identifier) {
+		return null;
+	}
 }

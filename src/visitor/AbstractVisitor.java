@@ -10,7 +10,14 @@
 package visitor;
 
 import ast.*;
-import errorhandler.ErrorType;
+import ast.type.ArrayType;
+import ast.type.CharType;
+import ast.type.ErrorType;
+import ast.type.FunctionType;
+import ast.type.IntType;
+import ast.type.RealType;
+import ast.type.RecordType;
+import ast.type.VoidType;
 
 /**
  * Instance of AbstractVisitor.java

@@ -14,8 +14,8 @@ import visitor.Visitor;
 /**
  * Instance of UnaryNot.java
  * 
- * @author 
- * @version 
+ * @author
+ * @version
  */
 public class UnaryNot extends AbstractExpression {
 
@@ -24,7 +24,7 @@ public class UnaryNot extends AbstractExpression {
 	private int row = ASTNode.DEFAULT_ROW_COLUMN;
 	private int column = ASTNode.DEFAULT_ROW_COLUMN;
 
-	public UnaryNot(int i, int j, Expression expresion) {
+	public UnaryNot( int i, int j, Expression expresion ) {
 		this.row = i;
 		this.column = j;
 		this.expresion = expresion;
@@ -38,10 +38,9 @@ public class UnaryNot extends AbstractExpression {
 	}
 
 	/**
-	 * @param operand
-	 *            the operand to set
+	 * @param operand the operand to set
 	 */
-	public void setOperand(Expression operand) {
+	public void setOperand( Expression operand ) {
 		this.expresion = operand;
 	}
 
@@ -60,12 +59,13 @@ public class UnaryNot extends AbstractExpression {
 		return "! " + expresion.toString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see ast.ASTNode#accept(visitor.Visitor, java.lang.Object)
 	 */
 	@Override
 	public <P, R> R accept( Visitor<P, R> visitor, P param ) {
-		return visitor.visit(this, param);
+		return visitor.visit( this, param );
 	}
 
 }

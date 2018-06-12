@@ -7,52 +7,52 @@
  * See /LICENSE for license information.
  * 
  */
-package codegeneration;
+package visitor;
 
 import ast.FuncDefinition;
-import ast.FunctionType;
 import ast.Statement;
 import ast.VarDefinition;
-import visitor.AbstractVisitor;
+import ast.type.FunctionType;
 
 /**
  * Instance of OffsetVisitor.java
  * 
- * @author 
- * @version 
+ * @author
+ * @version
  * @param <P>
  */
 public class OffsetVisitor extends AbstractVisitor<Object, Object> {
-	
+
 	private int globalOffSet = 0;
 	private int paramOffSet = 4;
 	private int localOffSet = 0;
 
 	@Override
-	public Object visit(VarDefinition varDefinition, Object param) {
+	public Object visit( VarDefinition varDefinition, Object param ) {
 		if (varDefinition.getScope() == 0) {
-			varDefinition.setOffset(globalOffSet);
+			varDefinition.setOffset( globalOffSet );
 			globalOffSet += varDefinition.getType().getNumberOfBytes();
 		} else {
 
 			if ((boolean) param) {
-				varDefinition.setOffset(paramOffSet);
+				varDefinition.setOffset( paramOffSet );
 				paramOffSet += varDefinition.getType().getNumberOfBytes();
 			} else {
 				localOffSet -= varDefinition.getType().getNumberOfBytes();
-				varDefinition.setOffset(localOffSet);
+				varDefinition.setOffset( localOffSet );
 			}
 		}
-		System.out.println("Nombre: " + varDefinition.getName() + " OffSet: " + varDefinition.getOffset());
+		System.out.println(
+				"Nombre: " + varDefinition.getName() + " OffSet: " + varDefinition.getOffset() );
 		return null;
 	}
 
 	@Override
-	public Object visit(FuncDefinition funDefinition, Object param) {
-		funDefinition.getType().accept(this, param);
+	public Object visit( FuncDefinition funDefinition, Object param ) {
+		funDefinition.getType().accept( this, param );
 		if (funDefinition.getStatements() != null) {
 			for (Statement statement : funDefinition.getStatements()) {
-				statement.accept(this, false);
+				statement.accept( this, false );
 			}
 		}
 		this.localOffSet = 0;
@@ -62,10 +62,10 @@ public class OffsetVisitor extends AbstractVisitor<Object, Object> {
 	}
 
 	@Override
-	public Object visit(FunctionType functionType, Object param) {
-		functionType.getReturnType().accept(this, param);
+	public Object visit( FunctionType functionType, Object param ) {
+		functionType.getReturnType().accept( this, param );
 		for (int i = functionType.getParameters().size() - 1; i >= 0; i--) {
-			functionType.getParameters().get(i).accept(this, true);
+			functionType.getParameters().get( i ).accept( this, true );
 		}
 		return null;
 	}

@@ -13,7 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ast.*;
-import errorhandler.ErrorType;
+import ast.type.CharType;
+import ast.type.ErrorType;
+import ast.type.IntType;
+import ast.type.RealType;
+import ast.type.Type;
 import visitor.AbstractVisitor;
 
 /**
@@ -26,22 +30,24 @@ public class TypeCheckingVisitor extends AbstractVisitor<Object, Object> {
 
 	@Override
 	public Object visit( Variable var, Object param ) {
-		if(var.getDefinition() != null) {
+		if (var.getDefinition() != null) {
 			var.setType( var.getDefinition().getType() );
 		}
 		var.setLValue( true );
 		return true;
 	}
-	
+
 	@Override
 	public Object visit( Arithmetic arithmetic, Object param ) {
 		arithmetic.getLeft().accept( this, param );
 		arithmetic.getRight().accept( this, param );
 
-		arithmetic.setType( arithmetic.getLeft().getType().arithmetic( arithmetic.getRight().getType() ) );
+		arithmetic.setType(
+				arithmetic.getLeft().getType().arithmetic( arithmetic.getRight().getType() ) );
 		if (arithmetic.getType() == null) {
 			arithmetic.setType( new ErrorType( arithmetic,
-					"ERROR: Se esperaban tipos iguales (Reales o Enteros) en " + arithmetic.toString() ) );
+					"ERROR: Se esperaban tipos iguales (Reales o Enteros) en "
+							+ arithmetic.toString() ) );
 		}
 		arithmetic.setLValue( false );
 		return null;

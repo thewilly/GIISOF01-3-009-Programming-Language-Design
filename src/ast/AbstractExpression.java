@@ -9,6 +9,8 @@
  */
 package ast;
 
+import ast.type.Type;
+
 /**
  * Instance of AbstractExpression.java
  * 

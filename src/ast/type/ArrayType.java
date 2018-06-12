@@ -1,6 +1,6 @@
-package ast;
+package ast.type;
 
-import errorhandler.ErrorType;
+import ast.ASTNode;
 import visitor.Visitor;
 
 public class ArrayType extends AbstractType {
@@ -76,23 +76,15 @@ public class ArrayType extends AbstractType {
 		if (type instanceof IntType) {
 			return arrayType;
 		}
-		
+
 		System.out.println( type.getClass().toString() );
 
 		return null;
 	}
-	
+
 	@Override
 	public int getNumberOfBytes() {
 		return arrayType.getNumberOfBytes() * offset;
-	}
-
-	/* (non-Javadoc)
-	 * @see ast.Type#subfix()
-	 */
-	@Override
-	public String subfix() {
-		return this.arrayType.subfix();
 	}
 
 }

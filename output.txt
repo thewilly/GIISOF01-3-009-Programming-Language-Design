@@ -1,0 +1,90 @@
+#source "input.txt"
+
+	' * int i (offset 0)
+	' * int n (offset 2)
+	' * char c (offset 4)
+	' * struct {
+ 	intField:int
+ 	realField:real
+ } record (offset 5)
+
+ ' Invocation to the main function
+	CALL main
+	HALT
+ f:
+	' * Parameters
+	' * int a (offset 8)
+	' * real c (offset 4)
+
+	' * Local variables
+	' * real real (offset -4)
+
+	enter 4
+
+#line	11
+
+	PUSH BP
+	PUSHI -4
+	ADDI
+	PUSHA 4
+	LOADB
+	B2I
+	I2F
+	STOREF
+
+#line	12
+
+	PUSHA 0
+	PUSH BP
+	PUSHI 8
+	ADDI
+	LOADI
+	STOREI
+
+#line	13
+
+	PUSHA 2
+	LOADI
+	ret 2,4,6
+ main:
+	' * Parameters
+
+	' * Local variables
+	' * int i (offset -2)
+	' * real r (offset -6)
+
+	enter 6
+
+#line	19
+
+	PUSHA 0
+	LOADI
+	OUTI
+
+#line	19
+
+	PUSHA 2
+	LOADI
+	PUSH BP
+	PUSHI -6
+	ADDI
+	LOADF
+	CALL f
+	OUTI
+
+#line	19
+
+	PUSHA 5
+	PUSHI 0
+	ADDI
+	LOADI
+	OUTI
+
+#line	19
+
+	PUSHA 5
+	PUSHI 0
+	ADDI
+	LOADF
+	OUTF
+	ret 0,6,0

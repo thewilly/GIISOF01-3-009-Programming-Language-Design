@@ -1,7 +1,9 @@
-package ast;
+package ast.type;
 
 import java.util.List;
 
+import ast.ASTNode;
+import ast.VarDefinition;
 import visitor.Visitor;
 
 public class FunctionType extends AbstractType {
@@ -91,17 +93,26 @@ public class FunctionType extends AbstractType {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public int getNumberOfBytes() {
-		return this.returnType.getNumberOfBytes();
+		if (this.getReturnType() instanceof VoidType) {
+			return 0;
+		}
+
+		if (this.getReturnType() instanceof ErrorType) {
+			throw new IllegalStateException();
+		}
+
+		return this.getReturnType().getNumberOfBytes();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see ast.Type#subfix()
 	 */
 	@Override
-	public String subfix() {
+	public char subfix() {
 		return this.returnType.subfix();
 	}
 }

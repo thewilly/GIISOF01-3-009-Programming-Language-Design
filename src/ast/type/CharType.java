@@ -1,12 +1,12 @@
-package ast;
+package ast.type;
 
-import errorhandler.ErrorType;
+import ast.ASTNode;
 import visitor.Visitor;
 
 public class CharType extends AbstractType {
 
 	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-	
+
 	private static final int NUMBER_OF_BYTES = 1;
 
 	private static CharType instance = new CharType();
@@ -56,8 +56,14 @@ public class CharType extends AbstractType {
 	}
 
 	@Override
-	public Type comparison( Type type ) {
-		if (type instanceof ErrorType) {
+	public int getNumberOfBytes() {
+		return NUMBER_OF_BYTES;
+	}
+	
+	@Override
+	public Type arithmetic(Type type) {
+
+		if (type instanceof ErrorType || type instanceof RealType || type instanceof IntType) {
 			return type;
 		}
 
@@ -66,16 +72,30 @@ public class CharType extends AbstractType {
 		}
 
 		return null;
-	}
 
+	}
+	
 	@Override
-	public Type logical( Type type ) {
+	public Type comparison(Type type) {
 		if (type instanceof ErrorType) {
 			return type;
 		}
 
-		if (type instanceof CharType) {
-			return this;
+		if (type instanceof CharType || type instanceof IntType || type instanceof RealType) {
+			return IntType.getInstance();
+		}
+
+		return null;
+	}
+
+	@Override
+	public Type logical(Type type) {
+		if (type instanceof ErrorType) {
+			return type;
+		}
+
+		if (type instanceof CharType || type instanceof IntType) {
+			return IntType.getInstance();
 		}
 
 		return null;
@@ -87,8 +107,29 @@ public class CharType extends AbstractType {
 	}
 
 	@Override
-	public Type canBeCast( Type type ) {
+	public Type canBeCast(Type type) {
 		if (type instanceof ErrorType) {
+			return type;
+		}
+
+		if (type instanceof CharType) {
+			return this;
+		}
+
+		if (type instanceof IntType) {
+			return this;
+		}
+
+		if (type instanceof RealType) {
+			return this;
+		}
+
+		return null;
+	}
+
+	@Override
+	public Type promotesTo(Type type) {
+		if (type instanceof ErrorType || type instanceof IntType || type instanceof RealType) {
 			return type;
 		}
 
@@ -100,29 +141,26 @@ public class CharType extends AbstractType {
 	}
 
 	@Override
-	public Type promotesTo( Type type ) {
-		if (type instanceof ErrorType) {
+	public boolean isBuildInType() {
+		return true;
+	}
+
+	@Override
+	public char subfix() {
+		return 'B';
+	}
+
+	@Override
+	public Type superType(Type type) {
+
+		if (type instanceof ErrorType || type instanceof RealType || type instanceof IntType) {
 			return type;
 		}
 
 		if (type instanceof CharType) {
-			return this;
+			return IntType.getInstance();
 		}
 
 		return null;
 	}
-	
-	@Override
-	public int getNumberOfBytes() {
-		return NUMBER_OF_BYTES;
-	}
-
-	/* (non-Javadoc)
-	 * @see ast.Type#subfix()
-	 */
-	@Override
-	public String subfix() {
-		return "B";
-	}
-
 }

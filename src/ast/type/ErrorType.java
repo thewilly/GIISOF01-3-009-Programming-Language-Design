@@ -7,10 +7,10 @@
  * See /LICENSE for license information.
  * 
  */
-package errorhandler;
+package ast.type;
 
 import ast.ASTNode;
-import ast.AbstractType;
+import errorhandler.EH;
 import visitor.Visitor;
 
 /**
@@ -23,7 +23,7 @@ public class ErrorType extends AbstractType {
 
 	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 	private static final int NUMBER_OF_BYTES = 0;
-	
+
 	private ASTNode node;
 	private String message;
 
@@ -84,7 +84,7 @@ public class ErrorType extends AbstractType {
 	public <P, R> R accept( Visitor<P, R> visitor, P param ) {
 		return visitor.visit( this, param );
 	}
-	
+
 	@Override
 	public int getNumberOfBytes() {
 		return NUMBER_OF_BYTES;

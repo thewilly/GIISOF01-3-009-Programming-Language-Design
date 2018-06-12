@@ -2,8 +2,8 @@ grammar Pmm;
 
 @header {
   import ast.*;
+  import ast.type.*;
   import java.util.*;
-  import errorhandler.ErrorType;
 }
 
 // Sequence of variable and function definitions and a main function definition.
@@ -140,7 +140,7 @@ condition returns [Statement ast]
 
 // If statement can have a complex body associated or not. Same with the else.
 if_st returns [Statement ast]
- : 'if' condition {$ast = new IfStatement($start.getLine(), $start.getCharPositionInLine()+1, null, null, (Expression)$condition.ast);} ':' (elif_simple_body {((IfStatement)$ast).setIfBody($elif_simple_body.ast);}| elif_body{((IfStatement)$ast).setIfBody($elif_body.ast);}) (else_st {((IfStatement)$ast).setElseBody($else_st.ast);})?
+ : 'if' expression {$ast = new IfStatement($start.getLine(), $start.getCharPositionInLine()+1, null, null, (Expression)$expression.ast);} ':' (elif_simple_body {((IfStatement)$ast).setIfBody($elif_simple_body.ast);}| elif_body{((IfStatement)$ast).setIfBody($elif_body.ast);}) (else_st {((IfStatement)$ast).setElseBody($else_st.ast);})?
  ;
 
 // Else cal have a complex body.
@@ -161,7 +161,7 @@ elif_body returns [List<Statement> ast = new ArrayList<Statement>()]
 
 // While statement. before + after condition!
 while_st returns [Statement ast]
- : 'while' condition ':' while_body {$ast = new WhileStatement($start.getLine(), $start.getCharPositionInLine()+1, $while_body.ast, (Expression)$condition.ast);}
+ : 'while' expression ':' while_body {$ast = new WhileStatement($start.getLine(), $start.getCharPositionInLine()+1, $while_body.ast, (Expression)$expression.ast);}
  ;
 
 // Body of the while statement, must have at least one expression.

@@ -10,308 +10,341 @@
 package codegeneration;
 
 import ast.Arithmetic;
-import ast.ArrayType;
 import ast.Assignment;
 import ast.Cast;
 import ast.CharLiteral;
-import ast.CharType;
 import ast.Comparison;
 import ast.FieldAccess;
 import ast.FuncDefinition;
-import ast.FunctionType;
 import ast.IfStatement;
 import ast.Indexing;
 import ast.IntLiteral;
-import ast.IntType;
 import ast.Invocation;
 import ast.Logical;
 import ast.Negation;
 import ast.Program;
 import ast.Read;
 import ast.RealLiteral;
-import ast.RealType;
 import ast.RecordField;
-import ast.RecordType;
 import ast.Return;
 import ast.UnaryMinus;
 import ast.UnaryNot;
 import ast.VarDefinition;
 import ast.Variable;
-import ast.VoidType;
 import ast.WhileStatement;
 import ast.Write;
-import errorhandler.ErrorType;
+import ast.type.ArrayType;
+import ast.type.CharType;
+import ast.type.ErrorType;
+import ast.type.FunctionType;
+import ast.type.IntType;
+import ast.type.RealType;
+import ast.type.RecordType;
+import ast.type.VoidType;
 import visitor.Visitor;
 
 /**
  * Instance of AbstractCodeGeneratorVisitor.java
  * 
- * @author 
- * @version 
+ * @author
+ * @version
  * @param <P>
  */
 public class CodeGeneratorVisitor implements Visitor<Object, Object> {
-	
+
 	CodeGenerator generator;
-	
-	public CodeGeneratorVisitor(CodeGenerator generator) {
+
+	public CodeGeneratorVisitor( CodeGenerator generator ) {
 		this.generator = generator;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Arithmetic, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Arithmetic arithmetic, Object param ) {
-		throw new IllegalStateException("No template defined for Arithmetic.");
+		throw new IllegalStateException( "No template defined for Arithmetic." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.ArrayType, java.lang.Object)
 	 */
 	@Override
 	public Object visit( ArrayType arrayType, Object param ) {
-		throw new IllegalStateException("No template defined for ArrayType.");
+		throw new IllegalStateException( "No template defined for ArrayType." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Assignment, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Assignment assignment, Object param ) {
-		throw new IllegalStateException("No template defined for Assignment.");
+		throw new IllegalStateException( "No template defined for Assignment." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Cast, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Cast cast, Object param ) {
-		throw new IllegalStateException("No template defined for Cast.");
+		throw new IllegalStateException( "No template defined for Cast." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.CharLiteral, java.lang.Object)
 	 */
 	@Override
 	public Object visit( CharLiteral charLiteral, Object param ) {
-		throw new IllegalStateException("No template defined for CharLiteral.");
+		throw new IllegalStateException( "No template defined for CharLiteral." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.CharType, java.lang.Object)
 	 */
 	@Override
 	public Object visit( CharType charType, Object param ) {
-		throw new IllegalStateException("No template defined for CharType.");
+		throw new IllegalStateException( "No template defined for CharType." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Comparison, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Comparison comparison, Object param ) {
-		throw new IllegalStateException("No template defined for Comparison.");
+		throw new IllegalStateException( "No template defined for Comparison." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.FieldAccess, java.lang.Object)
 	 */
 	@Override
 	public Object visit( FieldAccess fieldAccess, Object param ) {
-		throw new IllegalStateException("No template defined for FieldAccess.");
+		throw new IllegalStateException( "No template defined for FieldAccess." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.FuncDefinition, java.lang.Object)
 	 */
 	@Override
 	public Object visit( FuncDefinition funcDefinition, Object param ) {
-		throw new IllegalStateException("No template defined for FuncDefinition.");
+		throw new IllegalStateException( "No template defined for FuncDefinition." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.FunctionType, java.lang.Object)
 	 */
 	@Override
 	public Object visit( FunctionType functionType, Object param ) {
-		throw new IllegalStateException("No template defined for FunctionType.");
+		throw new IllegalStateException( "No template defined for FunctionType." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.IfStatement, java.lang.Object)
 	 */
 	@Override
 	public Object visit( IfStatement ifStatement, Object param ) {
-		throw new IllegalStateException("No template defined for IfStatement.");
+		throw new IllegalStateException( "No template defined for IfStatement." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Indexing, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Indexing indexing, Object param ) {
-		throw new IllegalStateException("No template defined for Indexing.");
+		throw new IllegalStateException( "No template defined for Indexing." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.IntLiteral, java.lang.Object)
 	 */
 	@Override
 	public Object visit( IntLiteral intLiteral, Object param ) {
-		throw new IllegalStateException("No template defined for IntLiteral.");
+		throw new IllegalStateException( "No template defined for IntLiteral." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.IntType, java.lang.Object)
 	 */
 	@Override
 	public Object visit( IntType intType, Object param ) {
-		throw new IllegalStateException("No template defined for IntType.");
+		throw new IllegalStateException( "No template defined for IntType." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Invocation, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Invocation invocation, Object param ) {
-		throw new IllegalStateException("No template defined for Invocation.");
+		throw new IllegalStateException( "No template defined for Invocation." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Logical, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Logical logical, Object param ) {
-		throw new IllegalStateException("No template defined for Logical.");
+		throw new IllegalStateException( "No template defined for Logical." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Negation, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Negation negation, Object param ) {
-		throw new IllegalStateException("No template defined for Negation.");
+		throw new IllegalStateException( "No template defined for Negation." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Program, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Program program, Object param ) {
-		throw new IllegalStateException("No template defined for Program.");
+		throw new IllegalStateException( "No template defined for Program." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Read, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Read read, Object param ) {
-		throw new IllegalStateException("No template defined for Read.");
+		throw new IllegalStateException( "No template defined for Read." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.RealLiteral, java.lang.Object)
 	 */
 	@Override
 	public Object visit( RealLiteral realLiteral, Object param ) {
-		throw new IllegalStateException("No template defined for RealLiteral.");
+		throw new IllegalStateException( "No template defined for RealLiteral." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.RealType, java.lang.Object)
 	 */
 	@Override
 	public Object visit( RealType realType, Object param ) {
-		throw new IllegalStateException("No template defined for RealType.");
+		throw new IllegalStateException( "No template defined for RealType." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.RecordField, java.lang.Object)
 	 */
 	@Override
 	public Object visit( RecordField recordField, Object param ) {
-		throw new IllegalStateException("No template defined for RecordField.");
+		throw new IllegalStateException( "No template defined for RecordField." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.RecordType, java.lang.Object)
 	 */
 	@Override
 	public Object visit( RecordType recordType, Object param ) {
-		throw new IllegalStateException("No template defined for RecordType.");
+		throw new IllegalStateException( "No template defined for RecordType." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Return, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Return return1, Object param ) {
-		throw new IllegalStateException("No template defined for Return.");
+		throw new IllegalStateException( "No template defined for Return." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.UnaryMinus, java.lang.Object)
 	 */
 	@Override
 	public Object visit( UnaryMinus unaryMinus, Object param ) {
-		throw new IllegalStateException("No template defined for UnaryMinus.");
+		throw new IllegalStateException( "No template defined for UnaryMinus." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.UnaryNot, java.lang.Object)
 	 */
 	@Override
 	public Object visit( UnaryNot unaryNot, Object param ) {
-		throw new IllegalStateException("No template defined for UnaryNot.");
+		throw new IllegalStateException( "No template defined for UnaryNot." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.VarDefinition, java.lang.Object)
 	 */
 	@Override
 	public Object visit( VarDefinition varDefinition, Object param ) {
-		throw new IllegalStateException("No template defined for VarDefinition.");
+		return null;
+		//throw new IllegalStateException( "No template defined for VarDefinition." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Variable, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Variable variable, Object param ) {
-		throw new IllegalStateException("No template defined for Variable.");
+		throw new IllegalStateException( "No template defined for Variable." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.VoidType, java.lang.Object)
 	 */
 	@Override
 	public Object visit( VoidType voidType, Object param ) {
-		throw new IllegalStateException("No template defined for VoidType.");
+		throw new IllegalStateException( "No template defined for VoidType." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.WhileStatement, java.lang.Object)
 	 */
 	@Override
 	public Object visit( WhileStatement whileStatement, Object param ) {
-		throw new IllegalStateException("No template defined for WhileStatement.");
+		throw new IllegalStateException( "No template defined for WhileStatement." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(ast.Write, java.lang.Object)
 	 */
 	@Override
 	public Object visit( Write write, Object param ) {
-		throw new IllegalStateException("No template defined for Write.");
+		throw new IllegalStateException( "No template defined for Write." );
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see visitor.Visitor#visit(errorhandler.ErrorType, java.lang.Object)
 	 */
 	@Override
 	public Object visit( ErrorType errorType, Object param ) {
-		throw new IllegalStateException("No template defined for ErrorType.");
+		throw new IllegalStateException( "No template defined for ErrorType." );
 	}
 
 }

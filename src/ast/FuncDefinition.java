@@ -2,13 +2,16 @@ package ast;
 
 import java.util.List;
 
+import ast.type.FunctionType;
+import ast.type.Type;
 import visitor.Visitor;
 
-public class FuncDefinition implements Definition, Statement {
+public class FuncDefinition implements Definition {
 
 	private List<Statement> statements;
 	private String name;
 	private Type type;
+	private int scope;
 
 	private int row = ASTNode.DEFAULT_ROW_COLUMN;
 	private int column = ASTNode.DEFAULT_ROW_COLUMN;
@@ -52,6 +55,16 @@ public class FuncDefinition implements Definition, Statement {
 	public int getColumn() {
 		return column;
 	}
+	
+	@Override
+	public int getScope() {
+		return this.scope;
+	}
+	
+	@Override
+	public void setScope(int scope) {
+		this.scope = scope;
+	}
 
 	@Override
 	public String toString() {
@@ -71,6 +84,25 @@ public class FuncDefinition implements Definition, Statement {
 	@Override
 	public <P, R> R accept( Visitor<P, R> visitor, P param ) {
 		return visitor.visit( this, param );
+	}
+	
+	public int localBytes() {
+		int total = 0;
+		for (Statement s : statements) {
+			if (s instanceof VarDefinition) {
+				total += ((VarDefinition) s).getType().getNumberOfBytes();
+			}
+		}
+		return total;
+	}
+
+	public int paramBytes() {
+		int total = 0;
+		for (VarDefinition v : ((FunctionType) getType()).getParameters()) {
+			total += v.getType().getNumberOfBytes();
+
+		}
+		return total;
 	}
 
 }

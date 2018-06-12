@@ -20,57 +20,54 @@ import visitor.Visitor;
  */
 public class Assignment implements Statement {
 
-    private Expression left, right;
-    private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	private Expression left, right;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 
-    /**
-     * Allocates an assignment object and initializes it.
-     * 
-     * @param line
-     *            where the statement is.
-     * @param column
-     *            where the statement is.
-     * @param left
-     *            side of the assignment.
-     * @param right
-     *            side of the assignment.
-     */
-    public Assignment(int line, int column, Expression left, Expression right) {
-	this.line = line;
-	this.column = column;
-	this.left = left;
-	this.right = right;
-    }
-    
-    public Expression getLeft() {
-	return this.left;
-    }
-    
-    public Expression getRight() {
-	return this.right;
-    }
+	/**
+	 * Allocates an assignment object and initializes it.
+	 * 
+	 * @param line where the statement is.
+	 * @param column where the statement is.
+	 * @param left side of the assignment.
+	 * @param right side of the assignment.
+	 */
+	public Assignment( int line, int column, Expression left, Expression right ) {
+		this.line = line;
+		this.column = column;
+		this.left = left;
+		this.right = right;
+	}
 
-    @Override
-    public int getLine() {
-	return this.line;
-    }
+	public Expression getLeft() {
+		return this.left;
+	}
 
-    @Override
-    public int getColumn() {
-	return this.column;
-    }
+	public Expression getRight() {
+		return this.right;
+	}
 
-    @Override
-    public String toString() {
-	return this.left.toString() + "=" + this.right.toString();
-    }
+	@Override
+	public int getLine() {
+		return this.line;
+	}
 
-    /* (non-Javadoc)
-     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
-     */
-    @Override
-    public <P, R> R accept(Visitor<P, R> visitor, P param) {
-	return visitor.visit(this, param);
-    }
+	@Override
+	public int getColumn() {
+		return this.column;
+	}
+
+	@Override
+	public String toString() {
+		return this.left.toString() + "=" + this.right.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+	 */
+	@Override
+	public <P, R> R accept( Visitor<P, R> visitor, P param ) {
+		return visitor.visit( this, param );
+	}
 
 }

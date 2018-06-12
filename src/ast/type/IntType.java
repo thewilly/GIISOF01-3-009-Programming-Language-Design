@@ -1,12 +1,12 @@
-package ast;
+package ast.type;
 
-import errorhandler.ErrorType;
+import ast.ASTNode;
 import visitor.Visitor;
 
 public class IntType extends AbstractType {
 
 	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-	
+
 	private static final int NUMBER_OF_BYTES = 2;
 
 	private static IntType instance = new IntType();
@@ -57,6 +57,11 @@ public class IntType extends AbstractType {
 
 	@Override
 	public boolean isLogical() {
+		return true;
+	}
+	
+	@Override
+	public boolean isBuildInType() {
 		return true;
 	}
 
@@ -135,17 +140,37 @@ public class IntType extends AbstractType {
 
 		return null;
 	}
-	
+
 	@Override
 	public int getNumberOfBytes() {
 		return NUMBER_OF_BYTES;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see ast.Type#subfix()
 	 */
 	@Override
-	public String subfix() {
-		return "I";
+	public char subfix() {
+		return 'I';
+	}
+	
+	@Override
+	public Type superType(Type type) {
+
+		if (type instanceof ErrorType) {
+			return type;
+		}
+
+		if (type instanceof RealType) {
+			return RealType.getInstance();
+		}
+
+		if (type instanceof IntType || type instanceof CharType) {
+			return this;
+		}
+
+		return null;
+
 	}
 }

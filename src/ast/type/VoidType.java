@@ -1,11 +1,12 @@
-package ast;
+package ast.type;
 
+import ast.ASTNode;
 import visitor.Visitor;
 
 public class VoidType extends AbstractType {
 
 	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-	
+
 	private static final int NUMBER_OF_BYTES = 0;
 
 	private static VoidType instance = new VoidType();
@@ -58,5 +59,10 @@ public class VoidType extends AbstractType {
 	@Override
 	public int getNumberOfBytes() {
 		return NUMBER_OF_BYTES;
+	}
+	
+	@Override
+	public boolean isBuildInType() {
+		return true;
 	}
 }

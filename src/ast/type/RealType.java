@@ -1,12 +1,12 @@
-package ast;
+package ast.type;
 
-import errorhandler.ErrorType;
+import ast.ASTNode;
 import visitor.Visitor;
 
 public class RealType extends AbstractType {
 
 	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-	
+
 	private static final int NUMBER_OF_BYTES = 4;
 
 	private static RealType instance = new RealType();
@@ -112,18 +112,38 @@ public class RealType extends AbstractType {
 
 		return null;
 	}
-	
+
 	@Override
 	public int getNumberOfBytes() {
 		return NUMBER_OF_BYTES;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see ast.Type#subfix()
 	 */
 	@Override
-	public String subfix() {
-		return "F";
+	public char subfix() {
+		return 'F';
+	}
+	
+	@Override
+	public boolean isBuildInType() {
+		return true;
+	}
+	
+	@Override
+	public Type superType(Type type) {
+
+		if (type instanceof ErrorType) {
+			return type;
+		}
+
+		if (type instanceof RealType || type instanceof IntType || type instanceof CharType) {
+			return this;
+		}
+
+		return null;
 	}
 
 }

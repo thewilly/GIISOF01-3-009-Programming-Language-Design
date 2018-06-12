@@ -13,6 +13,8 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import ast.type.ErrorType;
+
 /**
  * Instance of EH.java
  * 

@@ -19,51 +19,49 @@ import visitor.Visitor;
  */
 public class UnaryMinus extends AbstractExpression {
 
-    private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
-    private Expression expression;
+	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	private Expression expression;
 
-    /**
-     * Allocates a UnaryMinus object and initializes it.
-     * 
-     * @param line
-     *            where the unary minus is.
-     * @param column
-     *            where the unary minus is.
-     * @param variable
-     *            to apply the unary minus
-     */
-    public UnaryMinus(int line, int column, Expression variable) {
-	this.line = line;
-	this.column = column;
-	this.expression = variable;
+	/**
+	 * Allocates a UnaryMinus object and initializes it.
+	 * 
+	 * @param line where the unary minus is.
+	 * @param column where the unary minus is.
+	 * @param variable to apply the unary minus
+	 */
+	public UnaryMinus( int line, int column, Expression variable ) {
+		this.line = line;
+		this.column = column;
+		this.expression = variable;
 
-    }
-    
-    public Expression getExpression() {
-	return this.expression;
-    }
+	}
 
-    @Override
-    public int getLine() {
-	return this.line;
-    }
+	public Expression getExpression() {
+		return this.expression;
+	}
 
-    @Override
-    public int getColumn() {
-	return this.column;
-    }
+	@Override
+	public int getLine() {
+		return this.line;
+	}
 
-    @Override
-    public String toString() {
-	return "-" + this.expression.toString();
-    }
+	@Override
+	public int getColumn() {
+		return this.column;
+	}
 
-    /* (non-Javadoc)
-     * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
-     */
-    @Override
-    public <P, R> R accept(Visitor<P, R> visitor, P param) {
-	return visitor.visit(this, param);
-    }
+	@Override
+	public String toString() {
+		return "-" + this.expression.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ast.ASTNode#accept(ast.Visitor, java.lang.Object)
+	 */
+	@Override
+	public <P, R> R accept( Visitor<P, R> visitor, P param ) {
+		return visitor.visit( this, param );
+	}
 
 }

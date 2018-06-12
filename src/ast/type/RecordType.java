@@ -1,7 +1,9 @@
-package ast;
+package ast.type;
 
 import java.util.List;
 
+import ast.ASTNode;
+import ast.RecordField;
 import visitor.Visitor;
 
 public class RecordType extends AbstractType {
@@ -63,21 +65,31 @@ public class RecordType extends AbstractType {
 	}
 
 	@Override
-	public Type dot( String s ) {
+	public Type dot( String identifier ) {
 		for (RecordField r : getFields()) {
-			if (r.getName().equals( s )) {
+			if (r.getName().equals( identifier )) {
 				return r.getType();
 			}
 		}
 		return null;
 	}
-	
+
 	@Override
 	public int getNumberOfBytes() {
 		int numberOfBytes = 0;
-		for(RecordField field : this.getFields()) {
-			numberOfBytes =+ field.getType().getNumberOfBytes();
+		for (RecordField field : this.getFields()) {
+			numberOfBytes = +field.getType().getNumberOfBytes();
 		}
 		return numberOfBytes;
+	}
+	
+	@Override
+	public RecordField get(String nombre) {
+		for (RecordField r : fields) {
+			if (nombre.equals(r.getName())) {
+				return r;
+			}
+		}
+		return null;
 	}
 }
