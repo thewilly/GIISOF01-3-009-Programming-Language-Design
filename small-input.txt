@@ -1,3 +1,6 @@
+i:int;
 def main():void {
- a.b = 4;
+ i=0;
+ i++;
+ print i;
 }

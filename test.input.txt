@@ -12,8 +12,8 @@ MATRIXSIZE:int;
 matrix:[10][10]int;
 
 # Functions
-def setValue(row:int, columnn:int, value:int):void {
-	if row >= 0 && row < MATRIXSIZE && columnn >= 0 && columnn < MATRIXSIZE: {
+def setValue(row:int, column:int, value:int):void {
+	if row >= 0 && row < MATRIXSIZE && column >= 0 && column < MATRIXSIZE: {
 		matrix[row][column] = value;
 	}
 }
@@ -22,7 +22,7 @@ def getValue(row:int, columnn:int):int {
 		return -1;
 	}
 	else {	
-		return matrix[row][column];
+		return matrix[row][columnn];
 	}
 }
 def fill(value:int):void {

@@ -209,8 +209,10 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return1.getExpression().accept( valueVisitor, o );
 
 		FuncDefinition f = (FuncDefinition) o;
+		
 		generator.convert( return1.getExpression().getType(),
 				( (FunctionType) f.getType() ).getReturnType() );
+		
 		generator.ret( ( (FunctionType) f.getType() ).getReturnType().getNumberOfBytes(),
 				f.localBytes(), f.paramBytes() );
 
