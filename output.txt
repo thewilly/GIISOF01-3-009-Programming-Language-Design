@@ -30,6 +30,69 @@
 #line	5
 
 	PUSHA 0
+	PUSHA 0
+	LOADI
+	PUSHI 1
+	SUBI
+	STOREI
+
+#line	6
+
+	PUSHA 0
+	PUSHA 0
+	LOADI
+	PUSHI 5
+	ADDI
+	STOREI
+
+#line	7
+
+	PUSHA 0
+	PUSHA 0
+	LOADI
+	PUSHI 5
+	SUBI
+	STOREI
+
+#line	8
+
+	PUSHA 0
+	LOADI
+	OUTI
+
+#line	10
+
+	PUSHA 0
+	PUSHI 3
+	STOREI
+
+#line	11
+
+	PUSHA 0
+	PUSHA 0
+	LOADI
+	PUSHI 3
+	DIVI
+	STOREI
+
+#line	12
+
+	PUSHA 0
+	LOADI
+	OUTI
+
+#line	14
+
+	PUSHA 0
+	PUSHA 0
+	LOADI
+	PUSHI 3
+	MULI
+	STOREI
+
+#line	15
+
+	PUSHA 0
 	LOADI
 	OUTI
 	ret 0,0,0

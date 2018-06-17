@@ -134,7 +134,8 @@ read_st returns [List<Statement> ast = new ArrayList<Statement>()]
 // Built from and expression, a '=' operator and another expression.
 assigment returns [Statement ast]
  : ex1=expression '=' ex2=expression ';'? {$ast = new Assignment($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $ex2.ast);}
- | ex=expression '++' {$ast = new Assignment($start.getLine(), $start.getCharPositionInLine()+1, $ex.ast, new Arithmetic($start.getLine(), $start.getCharPositionInLine()+1, $ex.ast, "++", new IntLiteral($start.getLine(), $start.getCharPositionInLine(), 1)));}
+ | ex=expression op=('++'|'--') {$ast = new Assignment($start.getLine(), $start.getCharPositionInLine()+1, $ex.ast, new Arithmetic($start.getLine(), $start.getCharPositionInLine()+1, $ex.ast, $op.text, new IntLiteral($start.getLine(), $start.getCharPositionInLine(), 1)));}
+ | ex1=expression op=('+='|'-='|'*='|'/=') ex2=expression {$ast = new Assignment($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, new Arithmetic($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $op.text, $ex2.ast));}
  ;
 
 // An expression, the conditional operator and the expression to compare.
