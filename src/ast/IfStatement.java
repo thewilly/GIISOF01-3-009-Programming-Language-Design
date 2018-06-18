@@ -11,6 +11,8 @@ public class IfStatement implements Statement {
 	private List<Statement> ifBody, elseBody;
 
 	private Expression condition;
+	
+	private boolean ifBodyReturns = false, elseBodyReturs = false;
 
 	public IfStatement( int row, int column, List<Statement> ifBody, List<Statement> elseBody,
 			Expression condition ) {
@@ -53,6 +55,22 @@ public class IfStatement implements Statement {
 
 	public void setCondition( Expression condition ) {
 		this.condition = condition;
+	}
+
+	public boolean isIfBodyReturns() {
+		return ifBodyReturns;
+	}
+
+	public void setIfBodyReturns( boolean ifBodyReturns ) {
+		this.ifBodyReturns = ifBodyReturns;
+	}
+
+	public boolean isElseBodyReturns() {
+		return elseBodyReturs;
+	}
+
+	public void setElseBodyReturs( boolean elseBodyReturs ) {
+		this.elseBodyReturs = elseBodyReturs;
 	}
 
 	@Override

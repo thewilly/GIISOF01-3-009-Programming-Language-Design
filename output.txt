@@ -5,6 +5,77 @@
  ' Invocation to the main function
 	CALL main
 	HALT
+ f:
+	' * Parameters
+
+	' * Local variables
+
+	enter 0
+
+#line	4
+
+	PUSHI 0
+	ret 2,0,0
+ p:
+	' * Parameters
+	' * int e (offset 4)
+
+	' * Local variables
+
+	enter 0
+
+#line	14
+
+	PUSH BP
+	PUSHI 4
+	ADDI
+	LOADI
+	PUSHI 0
+	EQI
+	JZ Label0
+
+#line	15
+
+	PUSH BP
+	PUSHI 4
+	ADDI
+	LOADI
+	PUSHI 0
+	EQI
+	JZ Label2
+
+#line	16
+
+	PUSHI 0
+	ret 2,0,2
+Label2:
+
+#line	19
+
+	PUSHI 0
+	ret 2,0,2
+Label0:
+
+#line	27
+
+	PUSH BP
+	PUSHI 4
+	ADDI
+	LOADI
+	PUSHI 0
+	EQI
+	JZ Label4
+
+#line	28
+
+	PUSHI 1
+	ret 2,0,2
+Label4:
+
+#line	31
+
+	PUSHI 1
+	ret 2,0,2
  main:
 	' * Parameters
 
@@ -12,85 +83,58 @@
 
 	enter 0
 
-#line	3
+#line	45
+
+	PUSHA 0
+	PUSHI 2
+	CALL p
+	STOREI
+
+#line	46
+
+	PUSHA 0
+	CALL f
+	STOREI
+
+#line	47
+
+	PUSHA 0
+	CALL f
+	STOREI
+
+#line	48
+
+	PUSHA 0
+	PUSHI 3
+	CALL p
+	STOREI
+
+#line	49
+
+	PUSHA 0
+	LOADI
+	OUTI
+
+#line	50
+
+	PUSHA 0
+	CALL f
+	STOREI
+
+#line	51
+
+	PUSHA 0
+	LOADI
+	OUTI
+
+#line	52
 
 	PUSHA 0
 	PUSHI 0
+	CALL p
 	STOREI
 
-#line	4
-
-	PUSHA 0
-	PUSHA 0
-	LOADI
-	PUSHI 1
-	ADDI
-	STOREI
-
-#line	5
-
-	PUSHA 0
-	PUSHA 0
-	LOADI
-	PUSHI 1
-	SUBI
-	STOREI
-
-#line	6
-
-	PUSHA 0
-	PUSHA 0
-	LOADI
-	PUSHI 5
-	ADDI
-	STOREI
-
-#line	7
-
-	PUSHA 0
-	PUSHA 0
-	LOADI
-	PUSHI 5
-	SUBI
-	STOREI
-
-#line	8
-
-	PUSHA 0
-	LOADI
-	OUTI
-
-#line	10
-
-	PUSHA 0
-	PUSHI 3
-	STOREI
-
-#line	11
-
-	PUSHA 0
-	PUSHA 0
-	LOADI
-	PUSHI 3
-	DIVI
-	STOREI
-
-#line	12
-
-	PUSHA 0
-	LOADI
-	OUTI
-
-#line	14
-
-	PUSHA 0
-	PUSHA 0
-	LOADI
-	PUSHI 3
-	MULI
-	STOREI
-
-#line	15
+#line	53
 
 	PUSHA 0
 	LOADI

@@ -13,7 +13,7 @@ matrix:[10][10]int;
 
 # Functions
 def setValue(row:int, column:int, value:int):void {
-	if row >= 0 && row < MATRIXSIZE && column >= 0 && column < MATRIXSIZE: {
+	if (row >= 0 && row < MATRIXSIZE && column >= 0 && column < MATRIXSIZE): {
 		matrix[row][column] = value;
 	}
 }

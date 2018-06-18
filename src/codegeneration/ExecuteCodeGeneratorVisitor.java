@@ -85,7 +85,8 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 	public Object visit( FuncDefinition funcDefinition, Object o ) {
 
 		generator.etiqueta( funcDefinition.getName() );
-
+		System.out.println( "FuncDef found: " + funcDefinition.getName() + ". At: " + funcDefinition.getLine() + ", " + funcDefinition.getColumn());
+		
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// Comentarios parámetros
@@ -111,6 +112,18 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 			if (!( d instanceof VarDefinition )) {
 				generator.lineComment( d.getLine() );
 				d.accept( this, funcDefinition );
+				
+				// BEGIN OF: DEAD CODE OPTIMIZATION
+				if(d instanceof Return) {
+					break;
+				}
+				
+				if(d instanceof IfStatement 
+						&& ((IfStatement)d).isIfBodyReturns() 
+						&& ((IfStatement)d).isElseBodyReturns()) {
+					break;
+				}
+				// END OF: DEAD CODE OPTIMIZATION
 			}
 		}
 
@@ -156,21 +169,63 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 	@Override
 	public Object visit( IfStatement ifStatement, Object o ) {
 		int label = generator.getLabels( 2 );
+		
 		ifStatement.getCondition().accept( valueVisitor, o );
 		generator.jz( label );
 		for (Statement s : ifStatement.getIfBody()) {
 			generator.lineComment( s.getLine() );
 			s.accept( this, o );
+			
+			// BEGIN OF: DEAD CODE OPTIMIZATION
+			if(s instanceof Return) {
+				ifStatement.setIfBodyReturns( true );
+				break;
+			}
+			
+			if(s instanceof IfStatement 
+					&& ((IfStatement)s).isIfBodyReturns() 
+					&& ((IfStatement)s).isElseBodyReturns()) {
+				ifStatement.setElseBodyReturs( true );
+				ifStatement.setIfBodyReturns( true );
+				break;
+			}
+			// END OF: DEAD CODE OPTIMIZATION
 		}
-		generator.jmp( label + 1 );
+		
+		// BEGIN OF: DEAD CODE OPTIMIZATION
+		if(!ifStatement.isIfBodyReturns()) {
+		// END OF: DEAD CODE OPTIMIZATION
+			generator.jmp( label + 1 );
+		}
+		
 		generator.label( label );
 		if (ifStatement.getElseBody() != null) {
 			for (Statement s : ifStatement.getElseBody()) {
-				generator.lineComment( s.getLine() );
+				generator.lineComment( s.getLine() );		
 				s.accept( this, o );
+				
+				// BEGIN OF: DEAD CODE OPTIMIZATION
+				if(s instanceof Return) {
+					ifStatement.setElseBodyReturs( true );
+					break;
+				}
+				
+				if(s instanceof IfStatement 
+						&& ((IfStatement)s).isIfBodyReturns() 
+						&& ((IfStatement)s).isElseBodyReturns()) {
+					ifStatement.setElseBodyReturs( true );
+					ifStatement.setIfBodyReturns( true );
+					break;
+				}
+				// END OF: DEAD CODE OPTIMIZATION
 			}
 		}
-		generator.label( label + 1 );
+		
+		// BEGIN OF: DEAD CODE OPTIMIZATION
+		if(!ifStatement.isIfBodyReturns()) {
+		// END OF: DEAD CODE OPTIMIZATION
+			generator.label( label + 1 );
+		}
 
 		return null;
 	}
