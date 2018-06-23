@@ -10,14 +10,40 @@
 package visitor;
 
 import ast.*;
-import ast.type.ArrayType;
-import ast.type.CharType;
-import ast.type.ErrorType;
-import ast.type.FunctionType;
-import ast.type.IntType;
-import ast.type.RealType;
-import ast.type.RecordType;
-import ast.type.VoidType;
+import ast.definitions.Definition;
+import ast.definitions.FuncDefinition;
+import ast.definitions.VarDefinition;
+import ast.expressions.Arithmetic;
+import ast.expressions.Cast;
+import ast.expressions.Comparison;
+import ast.expressions.Expression;
+import ast.expressions.FieldAccess;
+import ast.expressions.Indexing;
+import ast.expressions.Invocation;
+import ast.expressions.Logical;
+import ast.expressions.Negation;
+import ast.expressions.UnaryMinus;
+import ast.expressions.UnaryNot;
+import ast.expressions.Variable;
+import ast.literals.CharLiteral;
+import ast.literals.IntLiteral;
+import ast.literals.RealLiteral;
+import ast.literals.RecordField;
+import ast.statements.Assignment;
+import ast.statements.IfStatement;
+import ast.statements.Read;
+import ast.statements.Return;
+import ast.statements.Statement;
+import ast.statements.WhileStatement;
+import ast.statements.Write;
+import ast.types.ArrayType;
+import ast.types.CharType;
+import ast.types.ErrorType;
+import ast.types.FunctionType;
+import ast.types.IntType;
+import ast.types.RealType;
+import ast.types.RecordType;
+import ast.types.VoidType;
 
 /**
  * Instance of AbstractVisitor.java
@@ -68,13 +94,13 @@ public class AbstractVisitor<P, R> implements Visitor<P, R> {
 	 */
 	@Override
 	public R visit( Cast cast, P param ) {
-		
+
 		if (cast.getExp() != null)
 			cast.getExp().accept( this, param );
-		
+
 		if (cast.getCastType() != null)
 			cast.getCastType().accept( this, param );
-		
+
 		return null;
 	}
 

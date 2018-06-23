@@ -1,55 +1,15 @@
-i:int;
+a:int;
 
-def f():int {
-	return 0;
-	
-	# Dead code that must not be generated.
-	print 1;
-	i = 0;
-	i++;
+def f(param_f:int): void {
+	print param_f;
 }
 
-def p(e:int):int {
-
-	if(e==0): {
-		if(e==0): {
-			return 0;
-		} 
-		else {
-			return 0;
-		}
-		# Dead code that must not be generated.
-		return 0;
-		e++;
-		print e;
-	}
-	else {
-		if(e==0): {
-			return 1;
-		} 
-		else {
-			return 1;
-		}
-		# Dead code that must not be generated.
-		return 1;
-		e++;
-		print e;
-	}
-	
-	# Dead code that must not be generated.
-	e++;
-	return 1;
+def g(ref param_g:int): void {
+	print param_g;
 }
 
 def main():void {
- i = p(2);
- i = f();
- i = f();
- i = p(3);
- print i;
- i = f();
- print i;
- i = p(0);
- print(i);
- 
+ a = 10;
+ f(a);
+ g(a);
 }

@@ -11,6 +11,8 @@ package ast;
 
 import java.util.List;
 
+import ast.definitions.Definition;
+import ast.statements.Statement;
 import visitor.Visitor;
 
 /**

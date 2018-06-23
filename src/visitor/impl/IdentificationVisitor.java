@@ -9,11 +9,11 @@
  */
 package visitor.impl;
 
-import ast.FuncDefinition;
-import ast.Statement;
-import ast.VarDefinition;
-import ast.Variable;
-import ast.type.ErrorType;
+import ast.definitions.FuncDefinition;
+import ast.definitions.VarDefinition;
+import ast.expressions.Variable;
+import ast.statements.Statement;
+import ast.types.ErrorType;
 import symboltable.SymbolTable;
 import visitor.AbstractVisitor;
 
@@ -24,12 +24,12 @@ import visitor.AbstractVisitor;
  * @version
  */
 public class IdentificationVisitor extends AbstractVisitor<Object, Object> {
-	
+
 	SymbolTable st = new SymbolTable();
 
 	@Override
 	public Object visit( Variable variable, Object param ) {
-		
+
 		variable.setDefinition(
 				st.find( variable.getName() ) );
 		if (variable.getDefinition() == null)

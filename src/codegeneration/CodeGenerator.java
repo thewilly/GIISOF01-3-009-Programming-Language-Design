@@ -13,12 +13,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-import ast.Definition;
-import ast.VarDefinition;
-import ast.type.CharType;
-import ast.type.IntType;
-import ast.type.RealType;
-import ast.type.Type;
+import ast.definitions.Definition;
+import ast.definitions.VarDefinition;
+import ast.types.CharType;
+import ast.types.IntType;
+import ast.types.RealType;
+import ast.types.Type;
 
 /**
  * Instance of CodeGenerator.java

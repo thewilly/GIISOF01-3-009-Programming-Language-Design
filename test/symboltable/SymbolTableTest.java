@@ -1,6 +1,6 @@
 package symboltable;
 
-import ast.VarDefinition;
+import ast.definitions.VarDefinition;
 
 public class SymbolTableTest {
 

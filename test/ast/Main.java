@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.*;
 
 import ast.Program;
 import codegeneration.ExecuteCodeGeneratorVisitor;
+import codeoptimization.ReturnStatementsIdentificatorVisitor;
 import errorhandler.EH;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
@@ -34,36 +35,38 @@ public class Main {
 
 		// * Check errors
 		if (EH.getInstance().hasErrors()) {
-			
+
 			// * Show errors
 			EH.getInstance().showErrors( System.err );
-		
+
 		} else {
-			
+
 			ast.accept( new TypeCheckingVisitor(), null );
-			
+
 			if (EH.getInstance().hasErrors()) {
-				
+
 				EH.getInstance().showErrors( System.err );
-			
+
 			} else {
-				
+
 				ast.accept( new OffsetVisitor(), null );
-				
+
 				if (EH.getInstance().hasErrors()) {
-					
+
 					EH.getInstance().showErrors( System.err );
-				
+
 				} else {
-					
-					ast.accept( new ExecuteCodeGeneratorVisitor(args[0], args[1]), null );
-					
+					ast.accept( new ReturnStatementsIdentificatorVisitor(), null );
+					ast.accept( new ExecuteCodeGeneratorVisitor( args[0], args[1] ), null );
+
 					// * The AST is shown
 					IntrospectorModel model = new IntrospectorModel( "Program", ast );
 					new IntrospectorTree( "Introspector", model );
+					
+					// Y colorín colorado este compilador se ha acabado...!
 				}
 			}
-			
+
 		}
 	}
 }

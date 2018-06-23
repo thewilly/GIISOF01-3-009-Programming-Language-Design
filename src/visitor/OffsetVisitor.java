@@ -9,12 +9,12 @@
  */
 package visitor;
 
-import ast.FuncDefinition;
-import ast.RecordField;
-import ast.Statement;
-import ast.VarDefinition;
-import ast.type.FunctionType;
-import ast.type.RecordType;
+import ast.definitions.FuncDefinition;
+import ast.definitions.VarDefinition;
+import ast.literals.RecordField;
+import ast.statements.Statement;
+import ast.types.FunctionType;
+import ast.types.RecordType;
 
 /**
  * Instance of OffsetVisitor.java
@@ -72,13 +72,13 @@ public class OffsetVisitor extends AbstractVisitor<Object, Object> {
 		}
 		return null;
 	}
-	
+
 	@Override
-	public Object visit(RecordType recordType, Object param) {
+	public Object visit( RecordType recordType, Object param ) {
 		int fieldOffset = 0;
 		for (RecordField r : recordType.getFields()) {
-			r.accept(this, param);
-			r.setOffset(fieldOffset);
+			r.accept( this, param );
+			r.setOffset( fieldOffset );
 			fieldOffset += r.getType().getNumberOfBytes();
 		}
 		return null;

@@ -13,7 +13,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import ast.type.ErrorType;
+import ast.types.ErrorType;
 
 /**
  * Instance of EH.java
@@ -47,5 +47,4 @@ public class EH {
 					+ error.getMessage() );
 		}
 	}
-
 }

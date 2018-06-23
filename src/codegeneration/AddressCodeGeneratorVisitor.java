@@ -1,10 +1,10 @@
 package codegeneration;
 
-import ast.FieldAccess;
-import ast.Indexing;
-import ast.VarDefinition;
-import ast.Variable;
-import ast.type.IntType;
+import ast.definitions.VarDefinition;
+import ast.expressions.FieldAccess;
+import ast.expressions.Indexing;
+import ast.expressions.Variable;
+import ast.types.IntType;
 
 public class AddressCodeGeneratorVisitor extends CodeGeneratorVisitor {
 

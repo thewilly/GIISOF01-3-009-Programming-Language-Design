@@ -12,12 +12,30 @@ package visitor.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import ast.*;
-import ast.type.CharType;
-import ast.type.ErrorType;
-import ast.type.IntType;
-import ast.type.RealType;
-import ast.type.Type;
+import ast.expressions.Arithmetic;
+import ast.expressions.Cast;
+import ast.expressions.Comparison;
+import ast.expressions.Expression;
+import ast.expressions.FieldAccess;
+import ast.expressions.Indexing;
+import ast.expressions.Invocation;
+import ast.expressions.Logical;
+import ast.expressions.UnaryMinus;
+import ast.expressions.UnaryNot;
+import ast.expressions.Variable;
+import ast.literals.CharLiteral;
+import ast.literals.IntLiteral;
+import ast.literals.RealLiteral;
+import ast.statements.Assignment;
+import ast.statements.IfStatement;
+import ast.statements.Read;
+import ast.statements.Statement;
+import ast.statements.WhileStatement;
+import ast.types.CharType;
+import ast.types.ErrorType;
+import ast.types.IntType;
+import ast.types.RealType;
+import ast.types.Type;
 import visitor.AbstractVisitor;
 
 /**

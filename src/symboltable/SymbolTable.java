@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ast.Definition;
+import ast.definitions.Definition;
 
 /**
  * Instance of SymbolTable.java
@@ -33,35 +33,35 @@ public class SymbolTable {
 	}
 
 	public void set() {
-		table.add(new HashMap<String, Definition>());
+		table.add( new HashMap<String, Definition>() );
 		this.scope++;
 	}
 
 	public void reset() {
-		table.remove(this.scope);
+		table.remove( this.scope );
 		this.scope--;
 	}
 
-	public boolean insert(Definition definition) {
-		if (definition != null && findInCurrentScope(definition.getName()) == null) {
-			this.table.get(this.scope).put(definition.getName(), definition);
-			definition.setScope(this.scope);
+	public boolean insert( Definition definition ) {
+		if (definition != null && findInCurrentScope( definition.getName() ) == null) {
+			this.table.get( this.scope ).put( definition.getName(), definition );
+			definition.setScope( this.scope );
 			return true;
 		}
 		return false;
 	}
 
-	public Definition find(String id) {
+	public Definition find( String id ) {
 		for (int i = this.scope; i >= 0; i--) {
-			if (this.table.get(i).containsKey(id)) {
-				return this.table.get(i).get(id);
+			if (this.table.get( i ).containsKey( id )) {
+				return this.table.get( i ).get( id );
 			}
 		}
 		return null;
 	}
 
-	public Definition findInCurrentScope(String id) {
-		return this.table.get(this.scope).get(id);
+	public Definition findInCurrentScope( String id ) {
+		return this.table.get( this.scope ).get( id );
 	}
 
 }

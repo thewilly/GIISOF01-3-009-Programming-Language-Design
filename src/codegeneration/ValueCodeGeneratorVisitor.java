@@ -9,23 +9,23 @@
  */
 package codegeneration;
 
-import ast.Arithmetic;
-import ast.Cast;
-import ast.CharLiteral;
-import ast.Comparison;
-import ast.Expression;
-import ast.FieldAccess;
-import ast.Indexing;
-import ast.IntLiteral;
-import ast.Invocation;
-import ast.Logical;
-import ast.RealLiteral;
-import ast.UnaryMinus;
-import ast.UnaryNot;
-import ast.Variable;
-import ast.type.FunctionType;
-import ast.type.IntType;
-import ast.type.Type;
+import ast.expressions.Arithmetic;
+import ast.expressions.Cast;
+import ast.expressions.Comparison;
+import ast.expressions.Expression;
+import ast.expressions.FieldAccess;
+import ast.expressions.Indexing;
+import ast.expressions.Invocation;
+import ast.expressions.Logical;
+import ast.expressions.UnaryMinus;
+import ast.expressions.UnaryNot;
+import ast.expressions.Variable;
+import ast.literals.CharLiteral;
+import ast.literals.IntLiteral;
+import ast.literals.RealLiteral;
+import ast.types.FunctionType;
+import ast.types.IntType;
+import ast.types.Type;
 
 /**
  * Instance of ValueCodeGeneratorVisitor.java
@@ -70,6 +70,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 
 		variable.accept( adressCgVisitor, object );
 		generator.load( variable.getDefinition().getType() );
+		if(variable.getType().isReferenceType()) {
+			generator.load( variable.getDefinition().getType() );
+		}
 
 		return null;
 	}

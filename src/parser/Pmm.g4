@@ -2,7 +2,11 @@ grammar Pmm;
 
 @header {
   import ast.*;
-  import ast.type.*;
+  import ast.types.*;
+  import ast.literals.*;
+  import ast.definitions.*;
+  import ast.expressions.*;
+  import ast.statements.*;
   import java.util.*;
 }
 
@@ -40,6 +44,7 @@ var_def returns [List<Definition> ast = new ArrayList<Definition>()]
 // When we only have one variable definition.
 single_var_def returns [VarDefinition ast]
  : ID {$ast = new VarDefinition($ID.line, $ID.pos+1, $ID.text, null);}':' build_in_type {$ast.setType($build_in_type.ast);}
+ | 'ref' ID {$ast = new VarDefinition($ID.line, $ID.pos+1, $ID.text, null);}':' build_in_type {$ast.setType(new ReferenceType($ID.line, $ID.pos+1, $build_in_type.ast));}
  ;
 
 // When we have an enumeration of variable and a definition.
