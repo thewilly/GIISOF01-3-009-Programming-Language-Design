@@ -1,11 +1,24 @@
-/*
- * This source file is part of the p--compiler open source project.
- *
- * Copyright (c) 2018 willy and the lab01 project authors.
- * Licensed under GNU General Public License v3.0.
- *
- * See /LICENSE for license information.
+/* 
+ * MIT License
  * 
+ * Copyright (c) 2018 Guillermo Facundo Colunga
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package ast.expressions;
 
@@ -21,20 +34,25 @@ import visitor.Visitor;
  */
 public class Arithmetic extends AbstractExpression {
 
+	/** The right. */
 	private Expression left, right;
+	
+	/** The column. */
 	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
+	
+	/** The operator. */
 	private String operator = "";
 
 	/**
 	 * Allocates an arithmetic object and initializes it so that it represents
 	 * and arithmetic expression composed by Arithmetic operator Arithmetic.
-	 * 
+	 *
 	 * @param line is the line of the expression.
 	 * @param column is the column of the expression.
 	 * @param left is the left side of the operation.
 	 * @param operator string representing the arithmetic operator for the
 	 *            expression.
-	 * @param right
+	 * @param right the right
 	 */
 	public Arithmetic( int line, int column, Expression left, String operator, Expression right ) {
 		this.line = line;
@@ -44,17 +62,25 @@ public class Arithmetic extends AbstractExpression {
 		this.right = right;
 	}
 
+	/* (non-Javadoc)
+	 * @see ast.ASTNode#getLine()
+	 */
 	@Override
 	public int getLine() {
 		return this.line;
 	}
 
+	/* (non-Javadoc)
+	 * @see ast.ASTNode#getColumn()
+	 */
 	@Override
 	public int getColumn() {
 		return this.column;
 	}
 
 	/**
+	 * Gets the left.
+	 *
 	 * @return the left
 	 */
 	public Expression getLeft() {
@@ -62,6 +88,8 @@ public class Arithmetic extends AbstractExpression {
 	}
 
 	/**
+	 * Sets the left.
+	 *
 	 * @param left the left to set
 	 */
 	public void setLeft( Expression left ) {
@@ -69,6 +97,8 @@ public class Arithmetic extends AbstractExpression {
 	}
 
 	/**
+	 * Gets the right.
+	 *
 	 * @return the right
 	 */
 	public Expression getRight() {
@@ -76,16 +106,26 @@ public class Arithmetic extends AbstractExpression {
 	}
 
 	/**
+	 * Sets the right.
+	 *
 	 * @param right the right to set
 	 */
 	public void setRight( Expression right ) {
 		this.right = right;
 	}
 
+	/**
+	 * Gets the operator.
+	 *
+	 * @return the operator
+	 */
 	public String getOperator() {
 		return this.operator;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return left.toString() + operator + right.toString();

@@ -149,6 +149,8 @@ assigment returns [Statement ast]
  : ex1=expression '=' ex2=expression ';'? {$ast = new Assignment($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $ex2.ast);}
  | ex=expression op=('++'|'--') {$ast = new Assignment($start.getLine(), $start.getCharPositionInLine()+1, $ex.ast, new Arithmetic($start.getLine(), $start.getCharPositionInLine()+1, $ex.ast, $op.text, new IntLiteral($start.getLine(), $start.getCharPositionInLine(), 1)));}
  | ex1=expression op=('+='|'-='|'*='|'/=') ex2=expression {$ast = new Assignment($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, new Arithmetic($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $op.text, $ex2.ast));}
+ | ex1=expression op=( '&&=' | '||=' ) ex2=expression {$ast = new Assignment($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, new Logical($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $op.text, $ex2.ast));}
+ | ex1=expression '^=' ex2=expression {$ast = new Assignment($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, new Logical($start.getLine(), $start.getCharPositionInLine(), new Logical($start.getLine(), $start.getCharPositionInLine(), new UnaryNot($start.getLine(), $start.getCharPositionInLine(),$ex1.ast), "&&", $ex2.ast), "||", new Logical($start.getLine(), $start.getCharPositionInLine(), $ex1.ast, "&&", new UnaryNot($start.getLine(), $start.getCharPositionInLine(),$ex2.ast))));}
  ;
 
 // An expression, the conditional operator and the expression to compare.

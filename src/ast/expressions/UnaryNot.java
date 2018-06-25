@@ -1,11 +1,24 @@
-/*
- * This source file is part of the PmmCompiler open source project.
- *
- * Copyright (c) 2018 willy and the PmmCompiler project authors.
- * Licensed under GNU General Public License v3.0.
- *
- * See /LICENSE for license information.
+/* 
+ * MIT License
  * 
+ * Copyright (c) 2018 Guillermo Facundo Colunga
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package ast.expressions;
 
@@ -20,11 +33,22 @@ import visitor.Visitor;
  */
 public class UnaryNot extends AbstractExpression {
 
+	/** The expresion. */
 	private Expression expresion;
 
+	/** The row. */
 	private int row = ASTNode.DEFAULT_ROW_COLUMN;
+	
+	/** The column. */
 	private int column = ASTNode.DEFAULT_ROW_COLUMN;
 
+	/**
+	 * Instantiates a new unary not.
+	 *
+	 * @param i the i
+	 * @param j the j
+	 * @param expresion the expresion
+	 */
 	public UnaryNot( int i, int j, Expression expresion ) {
 		this.row = i;
 		this.column = j;
@@ -32,6 +56,8 @@ public class UnaryNot extends AbstractExpression {
 	}
 
 	/**
+	 * Gets the operand.
+	 *
 	 * @return the operand
 	 */
 	public Expression getOperand() {
@@ -39,22 +65,33 @@ public class UnaryNot extends AbstractExpression {
 	}
 
 	/**
+	 * Sets the operand.
+	 *
 	 * @param operand the operand to set
 	 */
 	public void setOperand( Expression operand ) {
 		this.expresion = operand;
 	}
 
+	/* (non-Javadoc)
+	 * @see ast.ASTNode#getLine()
+	 */
 	@Override
 	public int getLine() {
 		return this.row;
 	}
 
+	/* (non-Javadoc)
+	 * @see ast.ASTNode#getColumn()
+	 */
 	@Override
 	public int getColumn() {
 		return this.column;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "! " + expresion.toString();

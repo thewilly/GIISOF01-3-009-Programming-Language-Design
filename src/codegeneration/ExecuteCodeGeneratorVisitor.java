@@ -1,11 +1,24 @@
-/*
- * This source file is part of the PmmCompiler open source project.
- *
- * Copyright (c) 2018 willy and the PmmCompiler project authors.
- * Licensed under GNU General Public License v3.0.
- *
- * See /LICENSE for license information.
+/* 
+ * MIT License
  * 
+ * Copyright (c) 2018 Guillermo Facundo Colunga
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package codegeneration;
 
@@ -34,20 +47,30 @@ import ast.types.VoidType;
  */
 public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 
+	/** The value visitor. */
 	private ValueCodeGeneratorVisitor valueVisitor;
+	
+	/** The address visitor. */
 	private AddressCodeGeneratorVisitor addressVisitor;
 
+	/** The input name. */
 	private String inputName;
 
 	/**
-	 * Allocates a [] object and initializes it so that it represents
-	 * 
-	 * @param generator
+	 * Allocates a [] object and initializes it so that it represents.
+	 *
+	 * @param generator the generator
 	 */
 	private ExecuteCodeGeneratorVisitor( CodeGenerator generator ) {
 		super( generator );
 	}
 
+	/**
+	 * Instantiates a new execute code generator visitor.
+	 *
+	 * @param entrada the entrada
+	 * @param salida the salida
+	 */
 	public ExecuteCodeGeneratorVisitor( String entrada, String salida ) {
 		this( new CodeGenerator( entrada, salida ) );
 		addressVisitor = new AddressCodeGeneratorVisitor( this.generator );
@@ -57,6 +80,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		this.inputName = entrada;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.Program, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Program program, Object o ) {
 
@@ -82,6 +108,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.definitions.FuncDefinition, java.lang.Object)
+	 */
 	@Override
 	public Object visit( FuncDefinition funcDefinition, Object o ) {
 
@@ -130,6 +159,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.statements.Write, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Write write, Object o ) {
 
@@ -139,6 +171,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.statements.Read, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Read read, Object o ) {
 
@@ -149,6 +184,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.statements.Assignment, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Assignment assignment, Object o ) {
 
@@ -160,6 +198,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.statements.IfStatement, java.lang.Object)
+	 */
 	@Override
 	public Object visit( IfStatement ifStatement, Object o ) {
 		int label = generator.getLabels( 2 );
@@ -207,6 +248,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.statements.WhileStatement, java.lang.Object)
+	 */
 	@Override
 	public Object visit( WhileStatement whileStatement, Object o ) {
 		int label = generator.getLabels( 2 );
@@ -228,6 +272,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.statements.DoWhileStatement, java.lang.Object)
+	 */
 	@Override
 	public Object visit( DoWhileStatement doWhileStatement, Object o ) {
 		int label = generator.getLabels( 1 );
@@ -247,6 +294,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.Invocation, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Invocation invocation, Object o ) {
 		invocation.accept( valueVisitor, o );
@@ -260,6 +310,9 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.statements.Return, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Return returnExp, Object o ) {
 		returnExp.getExpression().accept( valueVisitor, o );

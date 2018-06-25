@@ -1,0 +1,11 @@
+def f(i:int, j:int) : int {
+	i ^= j;
+	return i;
+}
+
+def main() : void {
+	print f(0,0);
+	print f(0,1);
+	print f(1,0);
+	print f(1,1);
+}

@@ -1,11 +1,24 @@
-/*
- * This source file is part of the PmmCompiler open source project.
- *
- * Copyright (c) 2018 willy and the PmmCompiler project authors.
- * Licensed under GNU General Public License v3.0.
- *
- * See /LICENSE for license information.
+/* 
+ * MIT License
  * 
+ * Copyright (c) 2018 Guillermo Facundo Colunga
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package visitor;
 
@@ -45,240 +58,308 @@ import ast.types.VoidType;
 
 /**
  * Instance of Visitor.java
- * 
+ *
  * @author Guillermo Facundo Colunga.
  * @version 201803121239
+ * @param <P> the generic type
+ * @param <R> the generic type
  */
 public interface Visitor<P, R> {
 
 	/**
-	 * @param arithmetic
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param arithmetic the arithmetic
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Arithmetic arithmetic, P param );
 
 	/**
-	 * @param arrayType
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param arrayType the array type
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( ArrayType arrayType, P param );
 
 	/**
-	 * @param assignment
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param assignment the assignment
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Assignment assignment, P param );
 
 	/**
-	 * @param cast
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param cast the cast
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Cast cast, P param );
 
 	/**
-	 * @param charLiteral
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param charLiteral the char literal
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( CharLiteral charLiteral, P param );
 
 	/**
-	 * @param charType
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param charType the char type
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( CharType charType, P param );
 
 	/**
-	 * @param comparison
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param comparison the comparison
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Comparison comparison, P param );
 
 	/**
-	 * @param fieldAccess
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param fieldAccess the field access
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( FieldAccess fieldAccess, P param );
 
 	/**
-	 * @param funcDefinition
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param funcDefinition the func definition
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( FuncDefinition funcDefinition, P param );
 
 	/**
-	 * @param functionType
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param functionType the function type
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( FunctionType functionType, P param );
 
 	/**
-	 * @param ifStatement
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param ifStatement the if statement
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( IfStatement ifStatement, P param );
 
 	/**
-	 * @param indexing
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param indexing the indexing
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Indexing indexing, P param );
 
 	/**
-	 * @param intLiteral
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param intLiteral the int literal
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( IntLiteral intLiteral, P param );
 
 	/**
-	 * @param intType
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param intType the int type
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( IntType intType, P param );
 
 	/**
-	 * @param invocation
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param invocation the invocation
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Invocation invocation, P param );
 
 	/**
-	 * @param logical
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param logical the logical
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Logical logical, P param );
 
 	/**
-	 * @param negation
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param negation the negation
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Negation negation, P param );
 
 	/**
-	 * @param program
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param program the program
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Program program, P param );
 
 	/**
-	 * @param read
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param read the read
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Read read, P param );
 
 	/**
-	 * @param realLiteral
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param realLiteral the real literal
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( RealLiteral realLiteral, P param );
 
 	/**
-	 * @param realType
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param realType the real type
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( RealType realType, P param );
 
 	/**
-	 * @param recordField
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param recordField the record field
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( RecordField recordField, P param );
 
 	/**
-	 * @param recordType
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param recordType the record type
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( RecordType recordType, P param );
 
 	/**
-	 * @param return1
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param return1 the return 1
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Return return1, P param );
 
 	/**
-	 * @param unaryMinus
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param unaryMinus the unary minus
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( UnaryMinus unaryMinus, P param );
 
 	/**
-	 * @param unaryMinus
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param unaryNot the unary not
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( UnaryNot unaryNot, P param );
 
 	/**
-	 * @param varDefinition
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param varDefinition the var definition
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( VarDefinition varDefinition, P param );
 
 	/**
-	 * @param variable
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param variable the variable
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Variable variable, P param );
 
 	/**
-	 * @param voidType
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param voidType the void type
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( VoidType voidType, P param );
 
 	/**
-	 * @param whileStatement
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param whileStatement the while statement
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( WhileStatement whileStatement, P param );
 	
 	/**
-	 * @param doWhileStatement
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param doWhileStatement the do while statement
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( DoWhileStatement doWhileStatement, P param );
 
 	/**
-	 * @param write
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param write the write
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( Write write, P param );
 
 	/**
-	 * @param errorType
-	 * @param param
-	 * @return
+	 * Visit.
+	 *
+	 * @param errorType the error type
+	 * @param param the param
+	 * @return the r
 	 */
 	R visit( ErrorType errorType, P param );
 

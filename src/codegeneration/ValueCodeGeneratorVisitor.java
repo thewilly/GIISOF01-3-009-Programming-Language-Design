@@ -1,11 +1,24 @@
-/*
- * This source file is part of the PmmCompiler open source project.
- *
- * Copyright (c) 2018 willy and the PmmCompiler project authors.
- * Licensed under GNU General Public License v3.0.
- *
- * See /LICENSE for license information.
+/* 
+ * MIT License
  * 
+ * Copyright (c) 2018 Guillermo Facundo Colunga
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package codegeneration;
 
@@ -35,14 +48,24 @@ import ast.types.Type;
  */
 public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 
+	/** The adress cg visitor. */
 	AddressCodeGeneratorVisitor adressCgVisitor;
 
+	/**
+	 * Instantiates a new value code generator visitor.
+	 *
+	 * @param cg the cg
+	 * @param adressCgVisitor the adress cg visitor
+	 */
 	public ValueCodeGeneratorVisitor( CodeGenerator cg,
 			AddressCodeGeneratorVisitor adressCgVisitor ) {
 		super( cg );
 		this.adressCgVisitor = adressCgVisitor;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.literals.IntLiteral, java.lang.Object)
+	 */
 	@Override
 	public Object visit( IntLiteral intLiteral, Object o ) {
 
@@ -51,6 +74,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.literals.CharLiteral, java.lang.Object)
+	 */
 	@Override
 	public Object visit( CharLiteral charLiteral, Object o ) {
 
@@ -58,6 +84,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.literals.RealLiteral, java.lang.Object)
+	 */
 	@Override
 	public Object visit( RealLiteral realLiteral, Object o ) {
 
@@ -65,6 +94,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.Variable, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Variable variable, Object object ) {
 
@@ -77,6 +109,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.Arithmetic, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Arithmetic arithmetic, Object object ) {
 
@@ -100,6 +135,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.Comparison, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Comparison comparison, Object o ) {
 
@@ -114,6 +152,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.Cast, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Cast cast, Object o ) {
 		cast.getExp().accept( this, o );
@@ -121,6 +162,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.Logical, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Logical logical, Object o ) {
 		logical.getLeft().accept( this, o );
@@ -133,6 +177,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.UnaryNot, java.lang.Object)
+	 */
 	@Override
 	public Object visit( UnaryNot negation, Object o ) {
 		negation.getOperand().accept( this, o );
@@ -140,6 +187,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.FieldAccess, java.lang.Object)
+	 */
 	@Override
 	public Object visit( FieldAccess fieldAccess, Object o ) {
 		fieldAccess.accept( adressCgVisitor, o );
@@ -147,6 +197,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.Indexing, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Indexing indexing, Object o ) {
 		indexing.accept( adressCgVisitor, o );
@@ -154,6 +207,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.Invocation, java.lang.Object)
+	 */
 	@Override
 	public Object visit( Invocation invocation, Object o ) {
 		int i = 0;
@@ -168,6 +224,9 @@ public class ValueCodeGeneratorVisitor extends CodeGeneratorVisitor {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see codegeneration.CodeGeneratorVisitor#visit(ast.expressions.UnaryMinus, java.lang.Object)
+	 */
 	@Override
 	public Object visit( UnaryMinus unaryMinus, Object o ) {
 
