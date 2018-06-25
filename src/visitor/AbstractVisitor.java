@@ -30,6 +30,7 @@ import ast.literals.IntLiteral;
 import ast.literals.RealLiteral;
 import ast.literals.RecordField;
 import ast.statements.Assignment;
+import ast.statements.DoWhileStatement;
 import ast.statements.IfStatement;
 import ast.statements.Read;
 import ast.statements.Return;
@@ -385,6 +386,20 @@ public class AbstractVisitor<P, R> implements Visitor<P, R> {
 		if (whileStatement.getBody() != null)
 			for (Statement st : whileStatement.getBody())
 				st.accept( this, param );
+		return null;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see visitor.Visitor#visit(ast.DoWhileStatement, java.lang.Object)
+	 */
+	@Override
+	public R visit( DoWhileStatement doWhileStatement, P param ) {
+		if (doWhileStatement.getBody() != null)
+			for (Statement st : doWhileStatement.getBody())
+				st.accept( this, param );
+		if (doWhileStatement.getCondition() != null)
+			doWhileStatement.getCondition().accept( this, param );
 		return null;
 	}
 

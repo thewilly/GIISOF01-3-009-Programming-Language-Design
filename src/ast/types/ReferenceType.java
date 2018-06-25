@@ -7,21 +7,21 @@ public class ReferenceType extends AbstractType {
 
 	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 	
-	private Type type;
+	private Type ofType;
 	
 	public ReferenceType(int row, int column, Type ofType) {
 		this.row = row;
 		this.column = column;
-		this.type = ofType;
+		this.ofType = ofType;
 	}
 	
 	public void setTypeOfReference(Type type) {
-		this.type = type;
+		this.ofType = type;
 	}
 
 	@Override
 	public int getNumberOfBytes() {
-		return this.type.getNumberOfBytes();
+		return this.ofType.getNumberOfBytes();
 	}
 	
 	@Override
@@ -35,12 +35,12 @@ public class ReferenceType extends AbstractType {
 	}
 	
 	public Type getOfType() {
-		return this.type;
+		return this.ofType;
 	}
 	
 	@Override
 	public char subfix() {
-		return this.type.subfix();
+		return this.ofType.subfix();
 	}
 	
 	@Override
@@ -50,10 +50,10 @@ public class ReferenceType extends AbstractType {
 	
 	@Override
 	public Type promotesTo( Type type ) {
-		return this.type.promotesTo( type );
+		return this.ofType.promotesTo( type );
 	}
 	
 	public String toString() {
-		return "[ReferenceType] : " + this.type;
+		return "[ReferenceType] : " + this.ofType;
 	}
 }

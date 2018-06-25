@@ -28,6 +28,7 @@ import ast.literals.IntLiteral;
 import ast.literals.RealLiteral;
 import ast.literals.RecordField;
 import ast.statements.Assignment;
+import ast.statements.DoWhileStatement;
 import ast.statements.IfStatement;
 import ast.statements.Read;
 import ast.statements.Return;
@@ -328,6 +329,15 @@ public class CodeGeneratorVisitor implements Visitor<Object, Object> {
 	@Override
 	public Object visit( WhileStatement whileStatement, Object param ) {
 		throw new IllegalStateException( "No template defined for WhileStatement." );
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see visitor.Visitor#visit(ast.WhileStatement, java.lang.Object)
+	 */
+	@Override
+	public Object visit( DoWhileStatement doWhileStatement, Object param ) {
+		throw new IllegalStateException( "No template defined for DoWhileStatement." );
 	}
 
 	/*

@@ -99,11 +99,13 @@ expression returns [Expression ast]
  | exp=expression '.' ID {$ast = new FieldAccess($ID.line, $ID.pos, $exp.ast, $ID.text);}
  | cast {$ast = $cast.ast;}
  | '-' expression {$ast = new UnaryMinus($start.getLine(), $start.getCharPositionInLine()+1, $expression.ast);}
- | '!' expression {$ast = new Negation($start.getLine(), $start.getCharPositionInLine()+1, $expression.ast);}
- | ex1=expression op=('*'|'%') ex2=expression {$ast = new Arithmetic($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $op.text, $ex2.ast);}
+ | '!' expression {$ast = new UnaryNot($start.getLine(), $start.getCharPositionInLine()+1, $expression.ast);}
+ | ex1=expression op=('*'|'/'|'%') ex2=expression {$ast = new Arithmetic($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $op.text, $ex2.ast);}
  | ex1=expression op=('+'|'-') ex2=expression {$ast = new Arithmetic($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $op.text, $ex2.ast);}
  | ex1=expression op=('>'|'>='|'<'|'<='|'!='|'==') ex2=expression {$ast = new Comparison($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $op.text, $ex2.ast);}
  | ex1=expression op=('&&'|'||') ex2=expression {$ast = new Logical($start.getLine(), $start.getCharPositionInLine()+1, $ex1.ast, $op.text, $ex2.ast);}
+ | ex1=expression '^' ex2=expression {$ast = new Logical($start.getLine(), $start.getCharPositionInLine(), new Logical($start.getLine(), $start.getCharPositionInLine(), new UnaryNot($start.getLine(), $start.getCharPositionInLine(),$ex1.ast), "&&", $ex2.ast), "||", new Logical($start.getLine(), $start.getCharPositionInLine(), $ex1.ast, "&&", new UnaryNot($start.getLine(), $start.getCharPositionInLine(),$ex2.ast)));}
+ | expression op=('++'|'--') {$ast = new Arithmetic($start.getLine(), $start.getCharPositionInLine()+1, $expression.ast, $op.text, new IntLiteral($start.getLine(), $start.getCharPositionInLine(), 1));}
  | var_invocation {$ast = $var_invocation.ast;}
  | func_invocation {$ast = $func_invocation.ast;}
  | INT_CONSTANT {$ast = new IntLiteral($start.getLine(), $start.getCharPositionInLine()+1, LexerHelper.lexemeToInt($INT_CONSTANT.text));}
@@ -118,12 +120,18 @@ expression returns [Expression ast]
 
 statement returns [List<Statement> ast = new ArrayList<Statement>()]
  : if_st {$ast.add($if_st.ast);}
+ | ternary {$ast.add($ternary.ast);}
  | while_st {$ast.add($while_st.ast);}
+ | dowhile_st {$ast.add($dowhile_st.ast);}
  | write_st {$ast.addAll($write_st.ast);}
  | read_st {$ast.addAll($read_st.ast);}
  | func_invocation {$ast.add((Statement)$func_invocation.ast);}
  | assigment {$ast.add($assigment.ast);}
  | return_st {$ast.add($return_st.ast);}
+ ;
+
+ternary returns [Statement ast]
+ : '(' expression ')' '?' s1=elif_simple_body ':' s2=elif_simple_body ';'? {$ast = new IfStatement($start.getLine(), $start.getCharPositionInLine(), $s1.ast, $s2.ast, $expression.ast);}
  ;
 
 // The word print followed by a non-empty comma separated list of expressions.
@@ -179,6 +187,11 @@ while_st returns [Statement ast]
 // Every expression ends in ';'
 while_body returns [List<Statement> ast = new ArrayList<Statement>()]
  : '{' (statement {$ast.addAll($statement.ast);} ';'?)+ '}'
+ ;
+
+// DoWhile statement.
+dowhile_st returns [Statement ast]
+ : 'do' ':' while_body 'while' expression ';'? {$ast = new DoWhileStatement($start.getLine(), $start.getCharPositionInLine(), $while_body.ast, (Expression)$expression.ast);}
  ;
 
 // the word return and the expression, that is mandatory.

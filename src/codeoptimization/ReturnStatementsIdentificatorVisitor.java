@@ -16,7 +16,10 @@ public class ReturnStatementsIdentificatorVisitor extends AbstractVisitor<Object
 				break;
 			}
 		}
-
+		if(ifStatement.getElseBody()== null) {
+			return null;
+		}
+		
 		for (Statement s : ifStatement.getElseBody()) {
 			s.accept( this, null );
 			if (s.promotesToReturn()) {

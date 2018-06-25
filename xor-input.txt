@@ -1,0 +1,10 @@
+def xor(_a:int, _b:int) : int {
+	return _a^_b;
+}
+
+def main() : void {
+	print xor(0,0); # 0
+	print xor(0,1); # 1
+	print xor(1,0); # 1
+	print xor(1,1); # 0
+}

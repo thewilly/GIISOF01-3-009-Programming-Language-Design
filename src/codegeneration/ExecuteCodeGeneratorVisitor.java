@@ -15,6 +15,7 @@ import ast.definitions.FuncDefinition;
 import ast.definitions.VarDefinition;
 import ast.expressions.Invocation;
 import ast.statements.Assignment;
+import ast.statements.DoWhileStatement;
 import ast.statements.IfStatement;
 import ast.statements.Read;
 import ast.statements.Return;
@@ -216,6 +217,7 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 			generator.lineComment( s.getLine() );
 			s.accept( this, o );
 
+			// Dead code removal...
 			if (s.promotesToReturn()) {
 				break;
 			}
@@ -223,6 +225,25 @@ public class ExecuteCodeGeneratorVisitor extends CodeGeneratorVisitor {
 		generator.jmp( label );
 		generator.label( label + 1 );
 
+		return null;
+	}
+	
+	@Override
+	public Object visit( DoWhileStatement doWhileStatement, Object o ) {
+		int label = generator.getLabels( 1 );
+		generator.label( label );
+		for (Statement s : doWhileStatement.getBody()) {
+			generator.lineComment( s.getLine() );
+			s.accept( this, o );
+
+			// Dead code removal...
+			if (s.promotesToReturn()) {
+				break;
+			}
+		}
+		doWhileStatement.getCondition().accept( valueVisitor, o );
+		generator.jnz( label );
+		
 		return null;
 	}
 

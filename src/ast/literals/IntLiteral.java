@@ -19,7 +19,7 @@ import visitor.Visitor;
  * @author Guillermo Facundo Colunga
  * @version 201802112344
  */
-public class IntLiteral extends AbstractExpression /*implements Literal<Integer>*/ {
+public class IntLiteral extends AbstractExpression implements Literal<Integer> {
 
 	private int line = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN, value;
 
@@ -36,13 +36,13 @@ public class IntLiteral extends AbstractExpression /*implements Literal<Integer>
 		this.value = value;
 	}
 
-	//@Override
-	public int getValue() {
+	@Override
+	public Integer getValue() {
 		return this.value;
 	}
 
-	//@Override
-	public void setValue( int value ) {
+	@Override
+	public void setValue( Integer value ) {
 		this.value = value;
 	}
 

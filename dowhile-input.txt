@@ -1,0 +1,12 @@
+def f(i:int) : void {
+	it:int;
+	it = 0;
+	do : {
+		print 1;
+		it++;
+	} while (it <= i);
+}
+
+def main():void {
+	f(1);
+}

@@ -4,7 +4,7 @@ import ast.ASTNode;
 import ast.expressions.AbstractExpression;
 import visitor.Visitor;
 
-public class CharLiteral extends AbstractExpression /*implements Literal<Character>*/ {
+public class CharLiteral extends AbstractExpression implements Literal<Character> {
 
 	private int row = ASTNode.DEFAULT_ROW_COLUMN, column = ASTNode.DEFAULT_ROW_COLUMN;
 
@@ -19,16 +19,16 @@ public class CharLiteral extends AbstractExpression /*implements Literal<Charact
 	/**
 	 * @return the value
 	 */
-	//@Override
-	public char getValue() {
+	@Override
+	public Character getValue() {
 		return value;
 	}
 
 	/**
 	 * @param value the value to set
 	 */
-	//@Override
-	public void setValue( char value ) {
+	@Override
+	public void setValue( Character value ) {
 		this.value = value;
 	}
 

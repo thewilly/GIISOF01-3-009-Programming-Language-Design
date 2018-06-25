@@ -28,6 +28,7 @@ import ast.literals.IntLiteral;
 import ast.literals.RealLiteral;
 import ast.literals.RecordField;
 import ast.statements.Assignment;
+import ast.statements.DoWhileStatement;
 import ast.statements.IfStatement;
 import ast.statements.Read;
 import ast.statements.Return;
@@ -259,6 +260,13 @@ public interface Visitor<P, R> {
 	 * @return
 	 */
 	R visit( WhileStatement whileStatement, P param );
+	
+	/**
+	 * @param doWhileStatement
+	 * @param param
+	 * @return
+	 */
+	R visit( DoWhileStatement doWhileStatement, P param );
 
 	/**
 	 * @param write

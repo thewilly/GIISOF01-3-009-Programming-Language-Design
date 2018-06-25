@@ -1,43 +1,58 @@
-#source "small-input.txt"
+#source "dowhile-input.txt"
 
-	' * int a (offset 0)
 
  ' Invocation to the main function
 	CALL main
 	HALT
  f:
 	' * Parameters
-	' * int param_f (offset 4)
+	' * int i (offset 4)
 
 	' * Local variables
+	' * int it (offset -2)
 
-	enter 0
+	enter 2
+
+#line	3
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSHI 0
+	STOREI
 
 #line	4
 
+Label0:
+
+#line	5
+
+	PUSHI 1
+	OUTI
+
+#line	6
+
+	PUSH BP
+	PUSHI -2
+	ADDI
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
+	PUSHI 1
+	ADDI
+	STOREI
+	PUSH BP
+	PUSHI -2
+	ADDI
+	LOADI
 	PUSH BP
 	PUSHI 4
 	ADDI
 	LOADI
-	OUTI
-	ret 0,0,2
- g:
-	' * Parameters
-	' * [ReferenceType] : int param_g (offset 4)
-
-	' * Local variables
-
-	enter 0
-
-#line	8
-
-	PUSH BP
-	PUSHI 4
-	ADDI
-	LOADI
-	LOADI
-	OUTI
-	ret 0,0,2
+	LEI
+	JNZ Label0
+	ret 0,2,2
  main:
 	' * Parameters
 
@@ -45,21 +60,8 @@
 
 	enter 0
 
-#line	12
+#line	11
 
-	PUSHA 0
-	PUSHI 10
-	STOREI
-
-#line	13
-
-	PUSHA 0
-	LOADI
+	PUSHI 1
 	CALL f
-
-#line	14
-
-	PUSHA 0
-	LOADI
-	CALL g
 	ret 0,0,0
